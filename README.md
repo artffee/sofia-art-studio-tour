@@ -40,6 +40,13 @@ Deploy: import the repo into Vercel (Framework preset: **Other**, no build comma
   **The door images are AI-generated decorative art, not photos of the venues.** To swap one, keep it 3:4 with the seam at the horizontal middle, then adjust `--py` (plate centre as a fraction of the image height) and `--fs` (numeral size) for that door in `styles.css`.
 - **"Did you know?" deck** (between Glimpses and Tickets): 12 fun facts in EN/BG. Tap a card to flip it with a paint splash, use "Another one" for a random fact, step with ‹ ›, or swipe the card. With reduced motion it fades instead of flipping.
 
+- **"Escape the Gallery" mini escape room** (`escape.js`, between the fun facts and Tickets): three quick puzzles, one per stop. Each one drops a brass key with a digit, and the three digits open the vault.
+  - I · Porthole door: tap the two portholes and the gear cluster → key **7**.
+  - II · Paint mixing: mix green (blue + yellow), orange (red + yellow), purple (red + blue) → key **2**.
+  - III · Treasure order: ring → clock → lamp → cello → key **5**.
+  - Vault: set the dials to **7 2 5**. You get spinning gears and steam, and "Now see it for real" scrolls to the booking form.
+  - It has two hint levels per puzzle, Reset and a timer. Progress is saved in `localStorage` (`ivosart-escape`). It works with touch and keyboard (arrow keys on tabs and dials), and with reduced motion it skips the animations. All riddles are invented and make no factual claims.
+
 ## Fun facts · sources
 
 Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.*`), and the same list is in a comment in `interactive.js` (§8).
