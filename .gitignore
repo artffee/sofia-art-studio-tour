@@ -1,0 +1,7 @@
+# local artefacts (kept out of the repo)
+*.zip
+sofia-art-tour-shots/
+screenshots/
+.DS_Store
+.vercel
+node_modules/
