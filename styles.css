@@ -1069,3 +1069,58 @@ html[lang=bg] .fact__q{font-size:clamp(1.4rem,5.6vw,1.9rem)}
   .esc__steam{display:none}
 }
 .esc [hidden]{display:none!important}
+
+/* ==========================================================================
+   v9 · NAV: Escape Room link, "Explore" dropdown, icon markers, compact menu
+   ========================================================================== */
+.ico{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tag-new{font:700 .5rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#14110c;background:var(--gold);padding:3px 5px 2px;border-radius:2px;align-self:center}
+/* desktop */
+.nav__links{align-items:center}
+.nav__esc{display:inline-flex;align-items:center;gap:7px;color:var(--gold)!important}
+.nav__esc .ico{width:16px;height:16px;transition:transform .5s var(--ease)}
+.nav__esc:hover .ico{transform:rotate(-25deg)}
+.nav__more{position:relative}
+.nav__morebtn{background:none;border:0;cursor:pointer;color:var(--bone-2);font:inherit;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;padding:6px 0;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-family:var(--sans)}
+.nav__morebtn svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.5;transition:transform .3s}
+.nav__morebtn:hover,.nav__morebtn[aria-expanded="true"]{color:var(--gold)}
+.nav__morebtn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.nav__drop{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);min-width:210px;background:rgba(14,12,10,.97);border:1px solid var(--gold-hair);box-shadow:0 18px 40px rgba(0,0,0,.5);padding:8px;display:flex;flex-direction:column}
+.nav__drop[hidden]{display:none}
+.nav__links .nav__drop a{display:flex;align-items:center;gap:12px;padding:10px 12px;text-transform:none;letter-spacing:.04em;font-size:.86rem;font-family:var(--display);color:var(--bone)}
+.nav__links .nav__drop a::after{display:none}
+.nav__links .nav__drop a .ico{color:var(--gold)}
+.nav__links .nav__drop a:hover,.nav__links .nav__drop a:focus-visible{background:rgba(212,176,98,.1);color:var(--gold)}
+/* mobile menu: compact, fits one phone screen */
+.menu{padding:18px 24px calc(22px + env(safe-area-inset-bottom));gap:16px}
+.menu nav{display:flex;flex-direction:column;gap:0}
+.menu .menu__main a{align-items:center;gap:16px;padding:11px 0;font-size:1.32rem}
+.menu .menu__main a .ico{color:var(--gold);width:19px;height:19px}
+.menu__label{margin:16px 0 8px;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);opacity:.8}
+.menu__play{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.menu .menu__play a{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--gold-hair);border-bottom:1px solid var(--gold-hair);font-family:var(--sans);font-size:.8rem;letter-spacing:.04em;color:var(--bone-2);min-height:44px}
+.menu .menu__play a .ico{color:var(--gold);width:17px;height:17px}
+.menu .menu__play a.menu__esc{grid-column:1/-1;font-family:var(--display);font-size:1.08rem;color:var(--gold);border-color:rgba(212,176,98,.55);background:linear-gradient(90deg,rgba(212,176,98,.12),rgba(212,176,98,.02))}
+.menu__esc .tag-new{margin-left:auto}
+.menu.is-in .menu__main a:nth-child(2),.menu.is-in .menu__play a:nth-child(2){animation-delay:.04s}
+.menu.is-in .menu__main a:nth-child(3),.menu.is-in .menu__play a:nth-child(3){animation-delay:.08s}
+.menu.is-in .menu__main a:nth-child(4),.menu.is-in .menu__play a:nth-child(4){animation-delay:.12s}
+.menu.is-in .menu__main a:nth-child(5),.menu.is-in .menu__play a:nth-child(5){animation-delay:.16s}
+.menu.is-in .menu__play a:nth-child(6){animation-delay:.2s}
+/* teaser at the end of the route */
+.esc-teaser{margin:34px auto 0;max-width:560px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px 16px;padding:14px 18px;border:1px dashed var(--gold-hair);text-align:center}
+.esc-teaser .ico{color:var(--gold);width:22px;height:22px}
+.esc-teaser p{margin:0;font-family:var(--display);font-style:italic;font-size:1.12rem;color:var(--bone)}
+/* desktop nav needs more room now: burger menu until 1200px */
+@media (min-width:1024px) and (max-width:1279.98px){
+  .nav__links{display:none}
+  .burger{display:grid}
+  .menu:not([hidden]){display:flex!important;left:auto;width:420px;border-left:1px solid var(--gold-hair)}
+}
+@media (min-width:1280px) and (max-width:1439.98px){
+  .nav__links{gap:22px}
+  .nav__links a,.nav__morebtn{letter-spacing:.17em}
+}
+@media (prefers-reduced-motion:reduce){.nav__esc .ico,.nav__morebtn svg{transition:none}}
+.nav__book{white-space:nowrap}
+@media (min-width:1024px){.nav__links .nav__tour{display:none}}

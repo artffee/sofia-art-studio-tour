@@ -68,6 +68,20 @@
 
   <!-- ================= HEADER / NAV ================= -->
   <header class="nav" id="top">
+    <!-- Menu icons (line style, reused by desktop nav and mobile menu) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-tour" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5 13.4 13.4 8.5 15.5 10.6 10.6z"/></symbol>
+      <symbol id="i-route" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+      <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3.5 7h17v3a2 2 0 0 0 0 4v3h-17v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="1.6 2"/></symbol>
+      <symbol id="i-artist" viewBox="0 0 24 24"><path d="M19.5 3.5 21 5l-9.5 9.5-2-2z"/><path d="M8.6 13.6c-2.8.2-3.6 2.3-3.9 4.4-.1.9-.7 1.6-1.7 2 3.6.9 7.7-.3 7.6-4.4"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="12" r="3.8"/><path d="M11.3 12H21M18 12v3.2M15 12v2.2"/></symbol>
+      <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.7.3-1 .8-1 1.6v.4"/><circle cx="12" cy="16.9" r=".4"/></symbol>
+      <symbol id="i-paint" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.3 0 1.9-.8 1.6-1.9-.4-1.3.4-2.3 1.8-2.3h1.8c1.9 0 3.3-1.4 3.3-3.5 0-5.2-3.8-9.3-8.5-9.3z"/><circle cx="8" cy="11" r="1"/><circle cx="11" cy="7.6" r="1"/><circle cx="15.3" cy="8.4" r="1"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17.5h6M10 20.5h4M8.6 14.6A6 6 0 1 1 15.4 14.6c-.8.7-1.2 1.6-1.2 2.9H9.8c0-1.3-.4-2.2-1.2-2.9z"/></symbol>
+      <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.6"/><path d="m4 17.5 5-4.5 3.5 3 3-2.5 4.5 4"/></symbol>
+      <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+    </svg>
     <div class="nav__inner">
       <a class="brand" href="#top" aria-label="IVOSART · Studio Walk — back to top">
         <span class="brand__mark" aria-hidden="true">
@@ -77,8 +91,19 @@
       </a>
 
       <nav class="nav__links" aria-label="Main">
-        <a href="#tour" data-i18n="nav.tour">The Tour</a>
+        <a href="#tour" class="nav__tour" data-i18n="nav.tour">The Tour</a>
         <a href="#route" data-i18n="nav.route">Route</a>
+        <a href="#escape" class="nav__esc"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg><span data-i18n="nav.escape">Escape Room</span><b class="tag-new" data-i18n="nav.new">New</b></a>
+        <div class="nav__more">
+          <button type="button" class="nav__morebtn" aria-expanded="false" aria-controls="moreMenu"><span data-i18n="nav.more">Explore</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
+          <div class="nav__drop" id="moreMenu" hidden>
+            <a href="#quiz"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-quiz"/></svg><span data-i18n="nav.quiz">Quiz</span></a>
+            <a href="#studio"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-paint"/></svg><span data-i18n="nav.paint">Paint studio</span></a>
+            <a href="#facts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="nav.facts">Fun facts</span></a>
+            <a href="#glimpses"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-photo"/></svg><span data-i18n="nav.glimpses">Glimpses</span></a>
+            <a href="#routeMap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-map"/></svg><span data-i18n="nav.map">Route map</span></a>
+          </div>
+        </div>
         <a href="#tickets" data-i18n="nav.tickets">Tickets</a>
         <a href="#artist" data-i18n="nav.artist">The Artist</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
@@ -101,11 +126,22 @@
     <!-- Mobile menu -->
     <div class="menu" id="menu" hidden>
       <nav aria-label="Mobile">
-        <a href="#tour"><em>—</em><span data-i18n="nav.tour">The Tour</span></a>
-        <a href="#route"><em>I</em><span data-i18n="nav.route">Route</span></a>
-        <a href="#tickets"><em>II</em><span data-i18n="nav.tickets">Tickets</span></a>
-        <a href="#artist"><em>III</em><span data-i18n="nav.artist">The Artist</span></a>
-        <a href="#contact"><em>—</em><span data-i18n="nav.contact">Contact</span></a>
+        <div class="menu__main">
+          <a href="#tour"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tour"/></svg><span data-i18n="nav.tour">The Tour</span></a>
+          <a href="#route"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-route"/></svg><span data-i18n="nav.route">Route</span></a>
+          <a href="#tickets"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ticket"/></svg><span data-i18n="nav.tickets">Tickets</span></a>
+          <a href="#artist"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-artist"/></svg><span data-i18n="nav.artist">The Artist</span></a>
+          <a href="#contact"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="nav.contact">Contact</span></a>
+        </div>
+        <p class="menu__label" data-i18n="nav.playk">Play &amp; explore</p>
+        <div class="menu__play">
+          <a href="#escape" class="menu__esc"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg><span data-i18n="nav.escape">Escape Room</span><b class="tag-new" data-i18n="nav.new">New</b></a>
+          <a href="#quiz"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-quiz"/></svg><span data-i18n="nav.quiz">Quiz</span></a>
+          <a href="#studio"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-paint"/></svg><span data-i18n="nav.paint">Paint studio</span></a>
+          <a href="#facts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="nav.facts">Fun facts</span></a>
+          <a href="#glimpses"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-photo"/></svg><span data-i18n="nav.glimpses">Glimpses</span></a>
+          <a href="#routeMap"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-map"/></svg><span data-i18n="nav.map">Route map</span></a>
+        </div>
       </nav>
       <a class="btn btn--gold js-book" href="#contact" data-i18n="cta.book">Book the tour</a>
       <p class="menu__foot" data-i18n="hero.kicker">Sofia, Bulgaria · Small groups · English &amp; Bulgarian</p>
@@ -309,6 +345,12 @@
               <button type="button" class="btn btn--gold btn--sm" id="studioSave" data-i18n="studio.save">Save my masterpiece</button>
             </div>
           </div>
+        </div>
+        <!-- Teaser for the escape-room mini game further down -->
+        <div class="esc-teaser reveal">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg>
+          <p data-i18n="esc.teaser">Can you escape the gallery?</p>
+          <a class="btn btn--ghost btn--sm js-jump" href="#escape" data-i18n="esc.teaserBtn">Try the escape room</a>
         </div>
       </div>
     </section>

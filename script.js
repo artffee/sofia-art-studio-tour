@@ -188,6 +188,8 @@ const I18N = {
     'egg.1': 'Steady hand.', 'egg.2': 'Bold choice of colour.', 'egg.3': 'Okay, Pollock. Save some paint for the studio.',
     'skip': 'Skip to content',
     'nav.tour': 'The Tour', 'nav.route': 'Route', 'nav.tickets': 'Tickets', 'nav.artist': 'The Artist', 'nav.contact': 'Contact',
+    'nav.escape': 'Escape Room', 'nav.new': 'New', 'nav.more': 'Explore', 'nav.playk': 'Play & explore', 'nav.quiz': 'Quiz', 'nav.paint': 'Paint studio', 'nav.facts': 'Fun facts', 'nav.glimpses': 'Glimpses', 'nav.map': 'Route map',
+    'esc.teaser': 'Can you escape the gallery?', 'esc.teaserBtn': 'Try the escape room',
     'cta.book': 'Book the tour', 'cta.route': 'Peek at the route',
     'hero.kicker': 'Sofia, Bulgaria · Small groups · English & Bulgarian',
     'hero.title': 'Inside Sofia\u2019s <span>Hidden</span> Art Studios',
@@ -407,6 +409,8 @@ const I18N = {
     'egg.1': 'Твърда ръка.', 'egg.2': 'Смел избор на цвят.', 'egg.3': 'Добре, Полък. Оставете малко боя и за ателието.',
     'skip': 'Към съдържанието',
     'nav.tour': 'Турът', 'nav.route': 'Маршрут', 'nav.tickets': 'Билети', 'nav.artist': 'Художникът', 'nav.contact': 'Контакт',
+    'nav.escape': 'Ескейп стая', 'nav.new': 'Ново', 'nav.more': 'Още', 'nav.playk': 'Играй и разгледай', 'nav.quiz': 'Тест', 'nav.paint': 'Мини ателие', 'nav.facts': 'Любопитни факти', 'nav.glimpses': 'Мигове', 'nav.map': 'Карта на маршрута',
+    'esc.teaser': 'Ще избягате ли от галерията?', 'esc.teaserBtn': 'Към ескейп стаята',
     'cta.book': 'Резервирай тура', 'cta.route': 'Надникни в маршрута',
     'hero.kicker': 'София, България · Малки групи · Английски и български',
     'hero.title': 'Скритите <span>арт</span> ателиета на София',
@@ -541,8 +545,55 @@ const I18N = {
   }
   burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-  addEventListener('resize', () => { if (innerWidth >= 1024) setMenu(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); setMore(false); } });
+  addEventListener('resize', () => { if (innerWidth >= 1280) setMenu(false); });
+
+  /* "Explore" dropdown on desktop */
+  const moreBtn = $('.nav__morebtn'), moreMenu = $('#moreMenu');
+  function setMore(open, focusFirst) {
+    if (!moreBtn) return;
+    moreBtn.setAttribute('aria-expanded', String(open));
+    moreMenu.hidden = !open;
+    if (open && focusFirst) moreMenu.querySelector('a').focus();
+  }
+  moreBtn?.addEventListener('click', () => setMore(moreBtn.getAttribute('aria-expanded') !== 'true'));
+  moreBtn?.addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); setMore(true, true); } });
+  moreMenu?.addEventListener('keydown', e => {
+    const items = [...moreMenu.querySelectorAll('a')], i = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    if (e.key === 'Escape') { setMore(false); moreBtn.focus(); }
+  });
+  document.addEventListener('click', e => { if (moreBtn && !e.target.closest('.nav__more')) setMore(false); });
+  $('.nav__more')?.addEventListener('focusout', e => { if (!e.currentTarget.contains(e.relatedTarget)) setMore(false); });
+
+  /* In-page jumps from the nav, menu and teasers: close menus, land below the fixed header */
+  const absTop = el => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
+  function jump(id) {
+    const el = document.getElementById(id); if (!el) return;
+    const target = () => Math.max(0, absTop(el) - nav.offsetHeight - 14);
+    const behavior = reduce ? 'instant' : 'smooth';
+    scrollTo({ top: target(), behavior });
+    history.replaceState(null, '', '#' + id);
+    let done = false;
+    const settle = () => {
+      if (done) return; done = true;
+      if (Math.abs(target() - scrollY) > 6) scrollTo({ top: target(), behavior: 'instant' });
+      if (!el.hasAttribute('tabindex') && !/^(A|BUTTON|INPUT|SELECT|TEXTAREA)$/.test(el.tagName)) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    };
+    if ('onscrollend' in window && !reduce) addEventListener('scrollend', settle, { once: true });
+    setTimeout(settle, reduce ? 30 : 1400);
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('.nav__links a[href^="#"], #menu a[href^="#"], a.js-jump');
+    if (!a || e.defaultPrevented) return;
+    const id = a.getAttribute('href').slice(1);
+    if (!id || !document.getElementById(id)) return;
+    e.preventDefault();
+    setMenu(false); setMore(false);
+    requestAnimationFrame(() => jump(id));
+  });
 
   const links = $$('.nav__links a');
   const secObs = new IntersectionObserver(entries => {
@@ -550,7 +601,7 @@ const I18N = {
       if (en.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['tour', 'route', 'tickets', 'artist', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secObs.observe(s); });
+  ['tour', 'route', 'escape', 'tickets', 'artist', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secObs.observe(s); });
 
   /* ---------- Reveal on scroll ---------- */
   if (reduce || !('IntersectionObserver' in window)) {

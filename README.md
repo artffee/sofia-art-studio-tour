@@ -47,6 +47,8 @@ Deploy: import the repo into Vercel (Framework preset: **Other**, no build comma
   - Vault: set the dials to **7 2 5**. You get spinning gears and steam, and "Now see it for real" scrolls to the booking form.
   - It has two hint levels per puzzle, Reset and a timer. Progress is saved in `localStorage` (`ivosart-escape`). It works with touch and keyboard (arrow keys on tabs and dials), and with reduced motion it skips the animations. All riddles are invented and make no factual claims.
 
+- **Navigation**: the desktop nav (from 1280px) has Route, **Escape Room** (key icon, "New" tag), an **Explore ▾** dropdown (Quiz, Paint studio, Fun facts, Glimpses, Route map), Tickets, The Artist and Contact. Below 1280px the burger menu shows the main links with line icons, then a compact "Play & explore" group that fits one phone screen. Menu links close the menu and land just below the fixed header. A small "Can you escape the gallery?" teaser at the end of the route links to the game.
+
 ## Fun facts · sources
 
 Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.*`), and the same list is in a comment in `interactive.js` (§8).
