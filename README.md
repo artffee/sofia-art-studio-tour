@@ -7,6 +7,8 @@ Bulgarian wine and your own small abstract painting to take home.
 Two tickets: **Studio Walk** (€40, 2.5 hours, up to 8 guests) and **Captain Nemo Night** (€75, 3 hours,
 up to 6 guests, by candlelight). English and Bulgarian (EN/BG toggle in the nav).
 
+Live: https://sofia-art-studio-tour.vercel.app
+
 Dark-luxury, Gothic Futurist design with real venue photos, a "Glimpses" gallery with a tap-to-enlarge lightbox, and playful bits: tap/drag on the hero and the finale to throw paint,
 route cards behind doors that swing open, a "Which evening are you?" quiz, paint bursts on Book buttons,
 and an easter egg on the logo.
@@ -75,8 +77,8 @@ The crop of each photo in its frame is set with `object-position` in `styles.css
 
 ### 3. Domain
 
-When the site has a live address, add the canonical / `og:url` tags and make the `og:image` URL absolute
-(see the comment in the `<head>` of `index.html`).
+The site is live at https://sofia-art-studio-tour.vercel.app. It is the Vercel project `sofia-art-studio-tour`, and every push to `main` deploys automatically.
+If you add a custom domain later, swap that base URL in the canonical, `og:url`, `og:image` and `twitter:image` tags in the `<head>` of `index.html`.
 
 ### Text and translations
 
