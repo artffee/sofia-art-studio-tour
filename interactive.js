@@ -443,5 +443,137 @@
     const lbBtn = $('.lightbox__cello'); if (lbBtn) lbBtn.hidden = !/punto-cellist/.test(e.detail.src);
   });
 
+  /* ------------------------------------------------------------------------
+     8. "Did you know?" fun-facts deck
+     Tap to flip (paint splash on the back), "Another one" draws a random unseen
+     fact, ‹ › step through, swipe the card sideways on touch screens.
+     Text: I18N keys ff.{n}q / ff.{n}a / ff.tag.* in script.js.
+
+     FACT_SOURCES (checked Nov 2026; also listed in README.md):
+      1  Serdica / "my Rome" / 7000 BC  https://en.wikipedia.org/wiki/Serdica
+                                        https://en.wikipedia.org/wiki/Sofia
+      2  Motto "Raste, no ne staree"    https://en.wikipedia.org/wiki/Sofia
+      3  49 springs, free mineral taps  https://en.wikipedia.org/wiki/Sofia
+                                        https://en.wikipedia.org/wiki/Sofia_Central_Mineral_Baths
+                                        https://www.lonelyplanet.com/points-of-interest/drinking-fountains/1307470
+      4  Vitosha, first Balkan nature park (1934)  https://en.wikipedia.org/wiki/Vitosha
+      5  Shishman St. namesake          https://bg.wikipedia.org/wiki/Цар_Иван_Шишман_(улица_в_София)
+                                        https://www.slav.uni-sofia.bg/exist/apps/sofia-togava/pages/show.html?directory=places&document=Car_Shishman_ulica.xml
+                                        https://sosofia.com/en/places/shishman-and-the-church-of-the-holy-seven-apostles/
+      6  Cyrillic, third EU script 2007 https://en.wikipedia.org/wiki/Cyrillic_script
+                                        http://europa.eu/rapid/press-release_SPEECH-07-330_en.pdf
+      7  Maron's Thracian wine, Odyssey https://en.wikipedia.org/wiki/Maron_(mythology)
+                                        https://en.wikipedia.org/wiki/Bulgarian_wine
+      8  Mavrud legend                  https://en.wikipedia.org/wiki/Mavrud
+      9  Melnik, smallest town, wine    https://en.wikipedia.org/wiki/Melnik,_Bulgaria
+     10  Pollock, household paint/floor https://en.wikipedia.org/wiki/Jackson_Pollock
+     11  Mummy brown, Burne-Jones       https://en.wikipedia.org/wiki/Mummy_brown
+     12  Nemo = "no one", Nautilus organ https://en.wikipedia.org/wiki/Captain_Nemo
+                                        https://en.wikipedia.org/wiki/Nautilus_(fictional_submarine)
+     ------------------------------------------------------------------------ */
+  const FACTS = ['sofia', 'sofia', 'sofia', 'sofia', 'shishman', 'abc', 'wine', 'wine', 'wine', 'art', 'paint', 'nemo'];
+  const card = $('#factCard');
+  if (card) {
+    const N = FACTS.length, splash = $('#factSplash');
+    const el = id => document.getElementById(id);
+    let i = 0, flipped = false, bag = [], busy = false;
+    const pad = n => String(n).padStart(2, '0');
+    const fill = () => {
+      const tag = t('ff.tag.' + FACTS[i]), num = `${pad(i + 1)} / ${N}`;
+      el('factTag').textContent = el('factTag2').textContent = tag;
+      el('factNum').textContent = el('factNum2').textContent = num;
+      el('factQ').textContent = t(`ff.${i + 1}q`);
+      el('factA').textContent = flipped ? t(`ff.${i + 1}a`) : '';
+      card.setAttribute('aria-label', `${tag} ${num}. ${flipped ? t(`ff.${i + 1}a`) : t(`ff.${i + 1}q`)}`);
+    };
+    const clearSplash = () => {
+      if (!splash) return;
+      const w = splash.offsetWidth, h = splash.offsetHeight, d = Math.min(devicePixelRatio || 1, 2);
+      splash.width = Math.max(1, Math.round(w * d)); splash.height = Math.max(1, Math.round(h * d));
+      splash.getContext('2d').setTransform(d, 0, 0, d, 0, 0);
+    };
+    const flip = (x, y) => {
+      flipped = !flipped;
+      card.classList.toggle('is-flipped', flipped);
+      card.setAttribute('aria-pressed', String(flipped));
+      fill();
+      if (flipped) {
+        buzz(8);
+        const r = card.getBoundingClientRect();
+        if (x == null) { x = r.left + r.width * (.25 + Math.random() * .5); y = r.top + r.height * (.3 + Math.random() * .4); }
+        if (splash) {
+          clearSplash();
+          const c = splash.getContext('2d'), col = IVO.BOLD[Math.floor(Math.random() * 5)];
+          // splash lands where the finger was (the back face reads left-to-right once flipped)
+          IVO.splat(c, clamp(x - r.left, 30, r.width - 30), clamp(y - r.top, 30, r.height - 30), 18 + Math.random() * 12, col);
+          if (Math.random() < .8) IVO.splat(c, r.width * Math.random(), r.height * (.75 + Math.random() * .2), 7 + Math.random() * 6, IVO.BOLD[Math.floor(Math.random() * IVO.BOLD.length)]);
+        }
+        IVO.burst(x, y, { n: 14, power: 6, size: 3 });
+      }
+    };
+    const go = (next, dir) => {
+      if (busy || next === i) return;
+      const swap = () => {
+        i = next; flipped = false;
+        card.classList.remove('is-flipped'); card.setAttribute('aria-pressed', 'false');
+        clearSplash(); fill();
+      };
+      if (reduce) { swap(); return; }
+      busy = true;
+      card.style.transform = '';
+      card.classList.add(dir > 0 ? 'is-out-l' : 'is-out-r');
+      setTimeout(() => {
+        card.classList.remove('is-out-l', 'is-out-r');
+        card.classList.add('is-instant', dir > 0 ? 'is-in-r' : 'is-in-l');
+        swap();
+        void card.offsetWidth;
+        card.classList.remove('is-instant', 'is-in-r', 'is-in-l');
+        setTimeout(() => { busy = false; }, 320);
+      }, 230);
+    };
+    const another = () => {
+      if (!bag.length) bag = [...Array(N).keys()].filter(k => k !== i).sort(() => Math.random() - .5);
+      go(bag.pop(), 1);
+    };
+    // swipe / drag
+    let sx = null, sy = 0, dx = 0, dragging = false, swallow = false;
+    card.addEventListener('pointerdown', e => {
+      if (e.button > 0 || busy) return;
+      sx = e.clientX; sy = e.clientY; dx = 0; dragging = false;
+    });
+    card.addEventListener('pointermove', e => {
+      if (sx == null) return;
+      dx = e.clientX - sx;
+      if (!dragging && Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(e.clientY - sy)) { dragging = true; try { card.setPointerCapture(e.pointerId); } catch (_) {} }
+      if (dragging && !reduce) card.style.transform = `translateX(${dx}px) rotate(${dx / 22}deg)`;
+    });
+    const end = () => {
+      if (sx == null) return;
+      if (dragging) {
+        swallow = true;
+        if (Math.abs(dx) > 60) go(dx < 0 ? (i + 1) % N : (i - 1 + N) % N, dx < 0 ? 1 : -1);
+        else card.style.transform = '';
+      }
+      sx = null; dragging = false;
+    };
+    card.addEventListener('pointerup', end);
+    card.addEventListener('pointercancel', () => { sx = null; dragging = false; card.style.transform = ''; });
+    card.addEventListener('click', e => {
+      if (swallow) { swallow = false; return; }
+      if (busy) return;
+      flip(e.detail ? e.clientX : null, e.detail ? e.clientY : null);
+    });
+    card.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go((i + 1) % N, 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go((i - 1 + N) % N, -1); }
+    });
+    $('#factNext')?.addEventListener('click', () => go((i + 1) % N, 1));
+    $('#factPrev')?.addEventListener('click', () => go((i - 1 + N) % N, -1));
+    $('#factShuffle')?.addEventListener('click', another);
+    document.addEventListener('langchange', fill);
+    fill();
+    window.IVO_facts = { go: n => go(n, 1), flip: () => flip(), another, state: () => ({ i, flipped }) };
+  }
+
   onScroll();
 })();

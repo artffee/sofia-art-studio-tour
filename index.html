@@ -184,7 +184,7 @@
             <g class="map__stop map__stop--fin" data-stop="3" data-at="1" tabindex="0" role="button" data-i18n-aria="map.s3aria" aria-label="Finale: wine and your own canvas" transform="translate(352 192)">
               <circle class="map__halo" r="22"/>
               <path class="map__glass" d="M-7 -14 h14 c0 9 -3 14 -7 14 c-4 0 -7 -5 -7 -14 z M0 0 v9 M-5 10 h10"/>
-              <text class="map__label" y="36" text-anchor="middle" data-i18n="map.fin">Wine &amp; canvas</text>
+              <text class="map__label" x="22" y="38" text-anchor="end" data-i18n="map.fin">Wine &amp; canvas</text>
             </g>
           </svg>
           <p class="map__note" data-i18n="map.note">Not to scale. Drawn with a brush, not a GPS. Tap a stop.</p>
@@ -355,6 +355,49 @@
         </ul>
         <button type="button" class="tilt-ask" id="tiltAsk" hidden data-i18n="tilt.ask">Tilt the photos with your phone</button>
         <p class="glimpses__swipe" aria-hidden="true"><span data-i18n="gl.swipe">Swipe for more</span> <b>→</b></p>
+      </div>
+    </section>
+
+    <!-- ================= DID YOU KNOW? (fun facts deck · interactive.js §8) =================
+         Every fact is checked against the sources listed in README.md ("Fun facts · sources")
+         and in the FACT_SOURCES comment in interactive.js. Text lives in I18N (keys ff.*). -->
+    <section class="section facts" id="facts" aria-labelledby="facts-title">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker" data-i18n="ff.kicker">Did you know?</p>
+          <h2 id="facts-title" data-i18n="ff.title">Fun facts for the walk</h2>
+          <svg class="brush" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 60 6, 110 20, 160 12 S 250 6, 294 13"/><path class="brush__thin" pathLength="1" d="M30 19 C 90 14, 170 22, 270 17"/></svg>
+          <p class="section__sub" data-i18n="ff.sub">Sofia, wine, paint and one famous captain. Tap a card to flip it.</p>
+        </header>
+        <div class="deck reveal" id="factDeck">
+          <div class="deck__stack" aria-hidden="true"><i></i><i></i></div>
+          <button type="button" class="fact" id="factCard" aria-pressed="false" aria-describedby="factHint">
+            <span class="fact__inner">
+              <span class="fact__face fact__front">
+                <span class="fact__top"><span class="fact__tag" id="factTag">Sofia</span><span class="fact__num" id="factNum">01 / 12</span></span>
+                <span class="fact__q" id="factQ">Which city did a Roman emperor call “my Rome”?</span>
+                <span class="fact__flip" data-i18n="ff.tap">Tap to flip</span>
+              </span>
+              <span class="fact__face fact__back">
+                <canvas class="fact__splash" id="factSplash" aria-hidden="true"></canvas>
+                <span class="fact__top"><span class="fact__tag" id="factTag2">Sofia</span><span class="fact__num" id="factNum2">01 / 12</span></span>
+                <span class="fact__a" id="factA" aria-live="polite"></span>
+                <span class="fact__flip" data-i18n="ff.back">Tap to flip back</span>
+              </span>
+            </span>
+          </button>
+          <p class="sr-only" id="factHint" data-i18n="ff.hint">Press to reveal the answer. Use the buttons below or swipe for another fact.</p>
+          <div class="deck__ctrl">
+            <button type="button" class="tool deck__nav" id="factPrev" data-i18n-aria="ff.prev" aria-label="Previous fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <button type="button" class="btn btn--gold btn--sm" id="factShuffle"><svg class="deck__dice" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg><span data-i18n="ff.another">Another one</span></button>
+            <button type="button" class="tool deck__nav" id="factNext" data-i18n-aria="ff.next" aria-label="Next fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          </div>
+          <p class="deck__swipe" aria-hidden="true" data-i18n="ff.swipe">Swipe the card for another</p>
+          <details class="deck__src">
+            <summary data-i18n="ff.sources">Sources</summary>
+            <p data-i18n="ff.srcnote">Checked against Wikipedia and other reputable sources. The full list is in the project README.</p>
+          </details>
+        </div>
       </div>
     </section>
 

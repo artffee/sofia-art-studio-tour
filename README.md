@@ -36,6 +36,26 @@ Deploy: import the repo into Vercel (Framework preset: **Other**, no build comma
 - **Candle mode**: the nav flame or "Preview it by candlelight" on the Night ticket dims the page to a flickering candle circle. Esc or the button turns it off; with reduced motion it is a plain dim.
 - **Booking request builder** (contact): evening, date, guests (max 8 / 6), language, name, and note. It builds a WhatsApp or email message from `CONFIG`; until those are filled in, it shows "to be added".
 - Small delights: brush-stroke scroll progress, gallery tilt (mouse or gyro), light haptics while painting, and tapping the cello plays a soft synthesized note.
+- **"Did you know?" deck** (between Glimpses and Tickets): 12 fun facts in EN/BG. Tap a card to flip it with a paint splash, use "Another one" for a random fact, step with ‹ ›, or swipe the card. With reduced motion it fades instead of flipping.
+
+## Fun facts · sources
+
+Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.*`), and the same list is in a comment in `interactive.js` (§8).
+
+| # | Fact | Sources |
+|---|------|---------|
+| 1 | Constantine: "Serdica is my Rome"; people here since at least 7000 BC | https://en.wikipedia.org/wiki/Serdica · https://en.wikipedia.org/wiki/Sofia |
+| 2 | Motto "Raste, no ne staree" (Ever growing, never ageing) | https://en.wikipedia.org/wiki/Sofia |
+| 3 | 49 mineral and thermal springs; free warm mineral-water taps by the Central Mineral Baths | https://en.wikipedia.org/wiki/Sofia · https://en.wikipedia.org/wiki/Sofia_Central_Mineral_Baths · https://www.lonelyplanet.com/points-of-interest/drinking-fountains/1307470 |
+| 4 | Vitosha became the first nature park in the Balkans in 1934 | https://en.wikipedia.org/wiki/Vitosha |
+| 5 | Shishman St. is named after Tsar Ivan Shishman, last ruler of the Tarnovo Tsardom; it is one of Sofia's liveliest streets | https://bg.wikipedia.org/wiki/Цар_Иван_Шишман_(улица_в_София) · https://www.slav.uni-sofia.bg/exist/apps/sofia-togava/pages/show.html?directory=places&document=Car_Shishman_ulica.xml · https://sosofia.com/en/places/shishman-and-the-church-of-the-holy-seven-apostles/ |
+| 6 | Cyrillic became the EU's third official script when Bulgaria joined in 2007 | https://en.wikipedia.org/wiki/Cyrillic_script · http://europa.eu/rapid/press-release_SPEECH-07-330_en.pdf |
+| 7 | Odysseus got the Cyclops drunk on Maron's Thracian wine (Odyssey); winemaking here goes back to the Thracians | https://en.wikipedia.org/wiki/Maron_(mythology) · https://en.wikipedia.org/wiki/Bulgarian_wine |
+| 8 | Legend of Mavrud, Khan Krum and the lion | https://en.wikipedia.org/wiki/Mavrud |
+| 9 | Melnik (pop. about 385) is Bulgaria's smallest town and known for strong wine since at least 1346 | https://en.wikipedia.org/wiki/Melnik,_Bulgaria |
+| 10 | Pollock poured household paint onto canvases laid on the floor | https://en.wikipedia.org/wiki/Jackson_Pollock |
+| 11 | Mummy brown was made from mummies; Burne-Jones reportedly buried his tube in 1881 | https://en.wikipedia.org/wiki/Mummy_brown |
+| 12 | "Nemo" is Latin for "no one" (after Odysseus's "Nobody"); the Nautilus has an organ Nemo plays in the evenings | https://en.wikipedia.org/wiki/Captain_Nemo · https://en.wikipedia.org/wiki/Nautilus_(fictional_submarine) |
 
 ## Things to fill in
 

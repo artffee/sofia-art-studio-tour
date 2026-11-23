@@ -785,3 +785,80 @@ html.candle-dim body{filter:sepia(.25)}
   .studio__actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .studio__actions .btn{grid-column:1/-1}
 }
+
+/* ==========================================================================
+   v5 · DID YOU KNOW? fun-facts deck  +  toast / map-label nits
+   ========================================================================== */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.deck{position:relative;max-width:600px;margin:0 auto;display:grid;justify-items:center;gap:18px}
+.deck__stack{position:absolute;left:0;right:0;top:0;height:340px;pointer-events:none}
+.deck__stack i{position:absolute;inset:0;border:1px solid var(--gold-hair);background:var(--ink-3)}
+.deck__stack i:first-child{transform:rotate(-3.2deg) translate(-6px,6px);background:linear-gradient(150deg,rgba(47,91,234,.18),var(--ink-3) 60%)}
+.deck__stack i:last-child{transform:rotate(2.4deg) translate(6px,4px);background:linear-gradient(200deg,rgba(224,38,63,.16),var(--ink-3) 60%)}
+.fact{position:relative;z-index:1;display:block;width:100%;height:340px;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;
+  perspective:1400px;touch-action:pan-y;-webkit-tap-highlight-color:transparent;transition:transform .32s cubic-bezier(.2,.7,.2,1),opacity .25s}
+.fact.is-instant{transition:none}
+.fact.is-out-l{transform:translateX(-120%) rotate(-10deg);opacity:0}
+.fact.is-out-r{transform:translateX(120%) rotate(10deg);opacity:0}
+.fact.is-in-r{transform:translateX(70%) rotate(6deg);opacity:0}
+.fact.is-in-l{transform:translateX(-70%) rotate(-6deg);opacity:0}
+.fact__inner{position:absolute;inset:0;display:block;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.3,1.35,.45,1)}
+.fact.is-flipped .fact__inner{transform:rotateY(180deg)}
+.fact__face{position:absolute;inset:0;display:flex;flex-direction:column;padding:22px 22px 18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.fact__front{background:radial-gradient(120% 90% at 85% 0%,rgba(212,176,98,.16),transparent 55%),linear-gradient(165deg,#1d1916,#0f0d0c);border:1px solid var(--gold-dim);
+  box-shadow:0 22px 50px -24px rgba(0,0,0,.9),inset 0 0 0 6px rgba(11,10,9,.6),inset 0 0 0 7px var(--gold-hair)}
+.fact__back{transform:rotateY(180deg);background:#f2ece0;color:#1b1714;border:1px solid #c9b48a;
+  box-shadow:0 22px 50px -24px rgba(0,0,0,.9),inset 0 0 0 6px #f2ece0,inset 0 0 0 7px rgba(140,110,60,.35)}
+.fact__back::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(120,100,70,.06) 0 1px,transparent 1px 4px),repeating-linear-gradient(0deg,rgba(120,100,70,.05) 0 1px,transparent 1px 4px)}
+.fact__splash{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none;mix-blend-mode:multiply}
+.fact__top{position:relative;display:flex;justify-content:space-between;align-items:center;gap:10px;font:500 .66rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase}
+.fact__tag{color:var(--gold);padding:6px 9px;border:1px solid var(--gold-hair)}
+.fact__back .fact__tag{color:#7a5a1c;border-color:rgba(122,90,28,.35)}
+.fact__num{color:var(--bone-2);opacity:.7}
+.fact__back .fact__num{color:#5a4f44}
+.fact__q{position:relative;margin:auto 0;font:500 clamp(1.55rem,6.2vw,2.05rem)/1.18 var(--serif);color:var(--bone)}
+.fact__q::before{content:"?";position:absolute;right:-6px;top:-.55em;font:600 5.6rem/1 var(--display);color:var(--gold);opacity:.1;pointer-events:none}
+.fact__a{position:relative;margin:auto 0;font:500 clamp(1.15rem,4.6vw,1.38rem)/1.42 var(--serif)}
+.fact__flip{position:relative;align-self:flex-end;font:500 .62rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.75;display:flex;gap:6px;align-items:center}
+.fact__flip::before{content:"↻";font-size:.95rem;letter-spacing:0}
+.fact__back .fact__flip{color:#7a5a1c}
+.fact:hover .fact__front{border-color:var(--gold)}
+.fact:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+.fact:not(.is-flipped) .fact__front .fact__flip{animation:factNudge 2.8s ease-in-out infinite}
+@keyframes factNudge{0%,80%,100%{transform:none}88%{transform:translateX(-4px)}94%{transform:translateX(2px)}}
+.deck__ctrl{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px}
+.deck__nav{width:44px;min-height:44px;padding:0;justify-content:center}
+#factShuffle{display:inline-flex;align-items:center;gap:10px;min-height:44px}
+.deck__dice{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6}
+.deck__dice circle{fill:currentColor;stroke:none}
+#factShuffle:hover .deck__dice{transform:rotate(90deg)}.deck__dice{transition:transform .4s}
+.deck__swipe{margin:-4px 0 0;font:italic 1rem var(--serif);color:var(--bone-2);opacity:.7}
+.deck__src{font-size:.8rem;color:var(--bone-2);text-align:center;max-width:420px}
+.deck__src summary{cursor:pointer;font:500 .62rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7;list-style:none}
+.deck__src summary::-webkit-details-marker{display:none}
+.deck__src summary::after{content:" +"}
+.deck__src[open] summary::after{content:" −"}
+.deck__src p{margin:8px 0 0;font:italic 1rem/1.4 var(--serif)}
+@media (min-width:720px){
+  .fact,.deck__stack{height:320px}
+  .fact__face{padding:30px 32px 24px}
+  .deck__swipe{display:none}
+}
+@media (hover:none){ .deck__swipe{display:block} }
+@media (prefers-reduced-motion:reduce){
+  .fact,.fact__inner{transition:none}
+  .fact__inner{transform-style:flat}
+  .fact .fact__back{transform:none;opacity:0;visibility:hidden}
+  .fact.is-flipped .fact__inner{transform:none}
+  .fact.is-flipped .fact__back{opacity:1;visibility:visible}
+  .fact.is-flipped .fact__front{visibility:hidden}
+  .fact:not(.is-flipped) .fact__front .fact__flip{animation:none}
+}
+html[lang=bg] .fact__q{font-size:clamp(1.4rem,5.6vw,1.9rem)}
+
+/* toast no longer covers headings: bottom of the screen (above the mobile book bar) */
+.toast{top:auto;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,20px)}
+.toast.is-on{transform:translate(-50%,0)}
+.candle-exit{bottom:calc(150px + env(safe-area-inset-bottom))}
+@media (min-width:1024px){ .toast{bottom:96px} .candle-exit{bottom:28px} }
