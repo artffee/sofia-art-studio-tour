@@ -862,3 +862,139 @@ html[lang=bg] .fact__q{font-size:clamp(1.4rem,5.6vw,1.9rem)}
 .toast.is-on{transform:translate(-50%,0)}
 .candle-exit{bottom:calc(150px + env(safe-area-inset-bottom))}
 @media (min-width:1024px){ .toast{bottom:96px} .candle-exit{bottom:28px} }
+
+/* ==========================================================================
+   v6 · STEAMPUNK ROUTE DOORS
+   Brass/bronze leaves with patina, riveted iron bands, a brass gear meshing
+   with a copper gear, a locking bolt, a pressure gauge and a valve-wheel
+   handle. Opening: gears turn + gauge needle jumps → bolt retracts → leaves
+   swing open with a puff of steam. Sizes use container units of .door, so
+   the 4:3 (mobile stop II) and 4:5 frames both stay in proportion.
+   ========================================================================== */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.door--steam{container-type:size;perspective:1100px;transform-style:flat;
+  --ease-mech:cubic-bezier(.65,0,.25,1);--gy:50cqh}
+.door--steam .door__leaf{
+  overflow:visible;
+  background:
+    radial-gradient(38cqw 30cqh at 18% 22%,rgba(78,150,128,.32),transparent 70%),
+    radial-gradient(30cqw 26cqh at 82% 78%,rgba(64,132,114,.28),transparent 70%),
+    radial-gradient(14cqw 10cqh at 70% 30%,rgba(92,170,146,.22),transparent 70%),
+    repeating-linear-gradient(0deg,rgba(255,236,190,.035) 0 1px,transparent 1px 3px),
+    linear-gradient(160deg,#8a6430 0%,#5e3f1b 32%,#7a5428 58%,#4a3014 100%);
+  box-shadow:inset 0 0 0 1px rgba(30,18,6,.9),inset 0 0 0 2px rgba(244,214,150,.18),inset 0 0 26px rgba(0,0,0,.55);
+  transition:transform 1.25s var(--ease-mech) 0s;
+}
+.door--steam .door__leaf--l{z-index:2}
+.door--steam .door__leaf--r{z-index:1;
+  background:
+    radial-gradient(34cqw 28cqh at 80% 20%,rgba(78,150,128,.30),transparent 70%),
+    radial-gradient(28cqw 24cqh at 22% 82%,rgba(64,132,114,.26),transparent 70%),
+    repeating-linear-gradient(0deg,rgba(255,236,190,.035) 0 1px,transparent 1px 3px),
+    linear-gradient(200deg,#8a6430 0%,#5e3f1b 34%,#7a5428 60%,#4a3014 100%)}
+/* recessed panel with a brass bevel */
+.door--steam .door__leaf::before{inset:calc(4cqh + 6.5cqw) 3.2cqw;border:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.05) 40%,rgba(0,0,0,.22));
+  box-shadow:inset 0 0 0 1px rgba(25,14,4,.85),inset 0 0 0 2.5px rgba(214,170,92,.45),inset 0 0 0 4px rgba(25,14,4,.6),0 0 0 1px rgba(255,230,170,.08)}
+/* no more glowing knob from the old doors; the seam gets a thin dark gap */
+.door--steam .door__leaf--l::after{content:"";top:0;bottom:0;right:0;left:auto;width:2px;height:auto;margin:0;border-radius:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(255,226,160,.25));box-shadow:none}
+.door--steam .door__leaf--r::after{content:none}
+/* riveted iron bands */
+.door__band{position:absolute;left:0;right:0;height:4.6cqw;min-height:12px;
+  background:
+    radial-gradient(circle at 50% 50%,#f0d9a2 0 .55cqw,#8b6a34 .75cqw,#1d1712 1.05cqw,transparent 1.2cqw) 1.6cqw 50%/5.4cqw 100% repeat-x,
+    linear-gradient(180deg,#4a423a,#2a2420 45%,#16120f);
+  box-shadow:0 1px 0 rgba(255,230,180,.12),0 2px 4px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12)}
+.door__band--t{top:4cqh}
+.door__band--b{bottom:4cqh}
+/* copper pipe with flanges (left leaf) */
+.door__pipe{position:absolute;left:0;top:76cqh;width:26cqw;height:2.6cqw;min-height:7px;border-radius:0 2cqw 2cqw 0;
+  background:linear-gradient(180deg,#f0b48a,#b5643a 40%,#6b2f12 85%);
+  box-shadow:0 2px 3px rgba(0,0,0,.55)}
+.door__pipe::before,.door__pipe::after{content:"";position:absolute;top:-1cqw;width:1.6cqw;height:calc(100% + 2cqw);border-radius:2px;
+  background:linear-gradient(180deg,#f6dc9c,#a77a34 55%,#4d3412)}
+.door__pipe::before{left:6cqw}.door__pipe::after{right:4cqw}
+/* gears */
+.door__gear{position:absolute;display:block;filter:drop-shadow(0 3px 4px rgba(0,0,0,.6));
+  transition:transform .7s cubic-bezier(.4,0,.2,1) .95s}
+.door__gear--big{width:28cqw;height:28cqw;left:calc(43cqw - 14cqw);top:calc(var(--gy) - 14cqw)}
+.door__gear--small{width:17cqw;height:17cqw;left:calc(10cqw - 8.5cqw);top:calc(var(--gy) + 12.3cqw - 8.5cqw);transform:rotate(18deg)}
+/* locking bolt: runs from under the big gear across the seam into the keeper */
+.door__bolt{position:absolute;left:43cqw;width:23cqw;top:calc(var(--gy) - 1.6cqw);height:3.2cqw;min-height:8px;border-radius:1cqw;
+  background:linear-gradient(180deg,#d9dde0,#7d838a 45%,#2e3236);box-shadow:0 2px 3px rgba(0,0,0,.6);
+  transition:transform .35s cubic-bezier(.5,0,.3,1) .9s}
+.door__keeper{position:absolute;left:11cqw;width:6.5cqw;top:calc(var(--gy) - 3cqw);height:6cqw;border-radius:1cqw;
+  background:linear-gradient(180deg,#4a423a,#1d1814);box-shadow:inset 0 0 0 1px rgba(255,230,180,.15),0 2px 3px rgba(0,0,0,.5)}
+.door__keeper::before,.door__keeper::after{content:"";position:absolute;left:50%;width:1.3cqw;height:1.3cqw;margin-left:-.65cqw;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f0d9a2,#6b4c1e)}
+.door__keeper::before{top:.5cqw}.door__keeper::after{bottom:.5cqw}
+/* pressure gauge */
+.door__gauge{position:absolute;right:5cqw;top:calc(4cqh + 9cqw);width:12cqw;height:12cqw;border-radius:50%;
+  background:
+    repeating-conic-gradient(from -135deg,#3a2a18 0 1.5deg,transparent 1.5deg 27deg) 50%/72% 72% no-repeat,
+    radial-gradient(circle,#f6edd4 0 52%,#d9c9a3 60%,transparent 61%),
+    radial-gradient(circle at 35% 30%,#fff0c2,#c39443 45%,#5a3d16 75%);
+  box-shadow:0 3px 5px rgba(0,0,0,.6),inset 0 0 0 1px rgba(40,24,8,.7)}
+.door__gauge::before{content:"";position:absolute;left:50%;bottom:-6cqw;width:2.4cqw;height:6.4cqw;margin-left:-1.2cqw;z-index:-1;
+  background:linear-gradient(90deg,#6b2f12,#d58c5e 45%,#6b2f12)}
+.door__gauge::after{content:"";position:absolute;left:50%;top:50%;width:2cqw;height:2cqw;margin:-1cqw 0 0 -1cqw;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff0c2,#5a3d16)}
+.door__needle{position:absolute;left:50%;top:50%;width:.7cqw;min-width:2px;height:4.6cqw;margin-left:-.35cqw;transform-origin:50% 0;
+  transform:translateY(0) rotate(150deg);background:linear-gradient(180deg,#8f1622,#e0263f);border-radius:1px;
+  transition:transform .8s cubic-bezier(.3,1.7,.5,1) .9s}
+/* valve-wheel handle */
+.door__valve{position:absolute;right:6cqw;top:calc(var(--gy) + 12cqh - 8cqw);width:16cqw;height:16cqw;display:block;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.6));transition:transform .7s cubic-bezier(.4,0,.2,1) .95s}
+/* engraved brass plate */
+.door--steam .door__num{top:calc(4cqh + 6.6cqw);transform:translate(-50%,0);font-family:'Cinzel','Cormorant SC',serif;font-weight:600;
+  font-size:clamp(1.5rem,8.5cqw,2.4rem);line-height:1.15;padding:.18em .7em .12em;color:#2b1a08;letter-spacing:.06em;
+  text-shadow:0 1px 0 rgba(255,240,200,.65),0 -1px 0 rgba(60,36,10,.35);border:0;border-radius:3px;
+  background:
+    radial-gradient(circle at 9px 50%,#5a3d16 0 1.5px,#f6dc9c 2px,#8a6a2c 3.2px,transparent 3.6px),
+    radial-gradient(circle at calc(100% - 9px) 50%,#5a3d16 0 1.5px,#f6dc9c 2px,#8a6a2c 3.2px,transparent 3.6px),
+    linear-gradient(170deg,#f4d995,#d2a654 40%,#a87a32 70%,#e6c47a);
+  box-shadow:0 0 0 1px #3a2610,0 0 0 3px rgba(212,176,98,.55),0 0 0 4px #2a1a08,0 6px 14px rgba(0,0,0,.6);
+  transition:opacity .35s .55s,transform .6s var(--ease) .5s}
+.door--steam .door__knock{bottom:calc(4cqh + 6.4cqw);left:50%;right:auto;transform:translateX(-50%);white-space:nowrap;
+  padding:6px 12px;background:rgba(18,13,9,.82);border:1px solid rgba(212,176,98,.55);color:#f1dfb4;font-size:.6rem;letter-spacing:.28em;
+  box-shadow:0 3px 8px rgba(0,0,0,.5)}
+/* steam */
+.door__steam{position:absolute;left:50cqw;top:var(--gy);width:0;height:0;pointer-events:none;z-index:4}
+.door__steam span{position:absolute;left:-9cqw;top:-9cqw;width:18cqw;height:18cqw;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(245,240,230,.75),rgba(245,240,230,.25) 45%,transparent 70%)}
+
+/* hover: a little shiver of the mechanism (closed doors only) */
+.door-frame:hover:not(.is-open) .door--steam .door__leaf--l{transform:rotateY(-6deg)}
+.door-frame:hover:not(.is-open) .door--steam .door__leaf--r{transform:rotateY(6deg)}
+.door-frame:hover:not(.is-open) .door__gear--big{transform:rotate(14deg);transition-delay:0s}
+.door-frame:hover:not(.is-open) .door__gear--small{transform:rotate(-5deg);transition-delay:0s}
+.door-frame:focus-visible .door__num{box-shadow:0 0 0 1px #3a2610,0 0 0 3px #fff2c4,0 0 0 5px #2a1a08,0 6px 14px rgba(0,0,0,.6)}
+
+/* ---- OPEN sequence: 0s gears + gauge, .35s bolt slides, .6s leaves swing, steam ---- */
+.door-frame.is-open .door__gear--big{transform:rotate(225deg);transition-delay:0s}
+.door-frame.is-open .door__gear--small{transform:rotate(-342deg);transition-delay:0s}
+.door-frame.is-open .door__valve{transform:rotate(-270deg);transition-delay:0s}
+.door-frame.is-open .door__needle{transform:rotate(30deg);transition-delay:0s}
+.door-frame.is-open .door__bolt{transform:translateX(-12cqw);transition-delay:.35s}
+.door-frame.is-open .door--steam .door__leaf--l{transform:rotateY(-108deg);transition-delay:.62s}
+.door-frame.is-open .door--steam .door__leaf--r{transform:rotateY(108deg);transition-delay:.62s}
+.door-frame.is-open .door--steam .door__num{opacity:0;transform:translate(-50%,-30%) scale(.85);transition-delay:.25s,.25s}
+.door-frame.is-open .door--steam .door__knock{opacity:0;transition-delay:0s}
+.door-frame.is-open .door__steam span{animation:steamPuff 1.5s ease-out .6s both}
+.door-frame.is-open .door__steam span:nth-child(2){animation-delay:.72s;animation-duration:1.7s;--sx:-7cqw}
+.door-frame.is-open .door__steam span:nth-child(3){animation-delay:.84s;animation-duration:1.4s;--sx:6cqw}
+@keyframes steamPuff{
+  0%{opacity:0;transform:translate(0,0) scale(.35)}
+  25%{opacity:.8}
+  100%{opacity:0;transform:translate(var(--sx,1cqw),-26cqw) scale(1.6)}
+}
+/* closing: leaves first (no delay), then the bolt shoots home and the gears wind back (delays above) */
+
+@media (max-width:719px){
+  .door--steam .door__knock{padding:5px 10px}
+}
+@media (prefers-reduced-motion:reduce){
+  /* doors start open (script.js) and stay hidden, exactly as before */
+  .door--steam .door__steam{display:none}
+}
+.door--steam .door__num,.door--steam .door__knock{z-index:5}
+.door__gear use,.door__valve use{width:100%;height:100%}
