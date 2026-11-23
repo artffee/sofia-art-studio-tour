@@ -7,7 +7,7 @@ Bulgarian wine and your own small abstract painting to take home.
 Two tickets: **Studio Walk** (€40, 2.5 hours, up to 8 guests) and **Captain Nemo Night** (€75, 3 hours,
 up to 6 guests, by candlelight). English and Bulgarian (EN/BG toggle in the nav).
 
-Dark-luxury, Gothic Futurist design with playful bits: tap/drag on the hero and the finale to throw paint,
+Dark-luxury, Gothic Futurist design with real venue photos, a "Glimpses" gallery with a tap-to-enlarge lightbox, and playful bits: tap/drag on the hero and the finale to throw paint,
 route cards behind doors that swing open, a "Which evening are you?" quiz, paint bursts on Book buttons,
 and an easter egg on the logo.
 
@@ -19,7 +19,7 @@ Plain static HTML / CSS / JS. No build step, no dependencies (fonts come from Go
 index.html   page structure + SEO / Open Graph tags
 styles.css   all styling
 script.js    CONFIG block, EN/BG translations, animations and interactions
-assets/      favicon, app icons, social preview image (og-image.jpg)
+assets/      favicon, app icons, social preview image (og-image.jpg), photos/
 vercel.json  optional headers for Vercel
 ```
 
@@ -46,13 +46,24 @@ pre-filled email, otherwise WhatsApp, otherwise they scroll to the Contact secti
 
 ### 2. Photos
 
-Search `index.html` for `PHOTO SLOT`. There are four:
+Real photos live in `assets/photos/` as JPG + WebP pairs (served with `<picture>`, WebP first):
 
-- Art Gallery Captain Nemo, A02x Studio, Punto Art Bazaar (route cards): replace the `<canvas class="frame__art">`
-  with the `<img>` line given in the comment, and delete the "Photo coming soon" label. The door animation keeps working.
-- Portrait of Ivaylo (The Artist section): replace the frame `<div>` with the `<img>` line in the comment.
+| File | Used in |
+| --- | --- |
+| `captain-nemo-staircase` | Route stop I (Art Gallery Captain Nemo), Glimpses, Captain Nemo Night ticket backdrop, social preview image |
+| `punto-cellist-shishman` | Route stop III (Punto Art Bazaar, Shishman St.), Glimpses. The parked car's licence plate is blurred. |
+| `bazaar-interior` | Glimpses ("Treasures on every shelf") |
+| `silver-rings` | Glimpses ("Silver, skulls and secrets") |
 
-Put the images in `assets/photos/`.
+Still open (search `index.html` for `PHOTO SLOT`):
+
+- **A02x Studio** (route stop II): replace the `<canvas class="frame__art">` with the `<picture>` snippet in the comment,
+  delete the "Photo coming soon" label and add `door-frame--photo` to the button. The door animation keeps working.
+- **Portrait of Ivaylo** (The Artist section): replace the frame `<div>` with the `<img>` line in the comment.
+
+To add more photos to Glimpses, copy one `<li class="glimpse">` block in `index.html`, point it at the new files,
+give it a new `data-index`, and add its caption / alt text to both languages in `I18N` (`gl.c*`, `alt.*`) in `script.js`.
+The crop of each photo in its frame is set with `object-position` in `styles.css` (look for `.stop--nemo`, `.g--stair`, etc.).
 
 ### 3. Domain
 

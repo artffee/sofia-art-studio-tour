@@ -149,14 +149,11 @@
         </header>
 
         <ol class="stops">
-          <li class="stop reveal">
-            <!-- PHOTO SLOT: Art Gallery Captain Nemo (interior / original works).
-                 Replace the <canvas class="frame__art"> below with:
-                 <img class="frame__img" src="assets/photos/captain-nemo.jpg" alt="Inside Art Gallery Captain Nemo" loading="lazy" width="1200" height="900">
-                 and delete the "Photo coming soon" <span>. The door animation keeps working on top of the photo. -->
-            <button class="frame door-frame" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
-              <canvas class="frame__art" data-seed="111" data-pal="gallery" aria-hidden="true"></canvas>
-              <span class="frame__label" data-i18n="photo.soon">Photo coming soon</span>
+          <li class="stop stop--nemo reveal">
+            <!-- PHOTO: Art Gallery Captain Nemo — the staircase (assets/photos/captain-nemo-staircase.jpg/.webp).
+                 Crop is tuned with object-position in styles.css (.stop--nemo .frame__img). -->
+            <button class="frame door-frame door-frame--photo" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
+              <picture><source type="image/webp" srcset="assets/photos/captain-nemo-staircase.webp"><img class="frame__img" src="assets/photos/captain-nemo-staircase.jpg" alt="Glowing blue glass staircase with brass edges inside Art Gallery Captain Nemo, walls covered in gears and machine parts" data-i18n-alt="alt.stair" width="1281" height="1600" loading="lazy" decoding="async"></picture>
               <span class="door" aria-hidden="true">
                 <span class="door__leaf door__leaf--l"></span>
                 <span class="door__leaf door__leaf--r"></span>
@@ -172,9 +169,9 @@
           </li>
           <li class="stop reveal">
             <!-- PHOTO SLOT: A02x Studio (paint, canvases, unfinished pieces).
-                 Replace the <canvas class="frame__art"> below with:
-                 <img class="frame__img" src="assets/photos/a02x-studio.jpg" alt="The A02x Studio" loading="lazy" width="1200" height="900">
-                 and delete the "Photo coming soon" <span>. The door animation keeps working on top of the photo. -->
+                 Replace the <canvas class="frame__art"> below with (same pattern as stops I and III):
+                 <picture><source type="image/webp" srcset="assets/photos/a02x-studio.webp"><img class="frame__img" src="assets/photos/a02x-studio.jpg" alt="The A02x Studio" width="1200" height="900" loading="lazy" decoding="async"></picture>
+                 delete the "Photo coming soon" <span>, and add the class door-frame--photo to the <button>. The door animation keeps working on top of the photo. -->
             <button class="frame door-frame" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
               <canvas class="frame__art" data-seed="212" data-pal="studio" aria-hidden="true"></canvas>
               <span class="frame__label" data-i18n="photo.soon">Photo coming soon</span>
@@ -191,14 +188,11 @@
               <p data-i18n="route.s2">The working studio: paint, canvases and unfinished pieces. Watch how abstract expressionism is actually made.</p>
             </div>
           </li>
-          <li class="stop reveal">
-            <!-- PHOTO SLOT: Punto Art Bazaar on Shishman Street.
-                 Replace the <canvas class="frame__art"> below with:
-                 <img class="frame__img" src="assets/photos/punto-art-bazaar.jpg" alt="Punto Art Bazaar on Shishman Street" loading="lazy" width="1200" height="900">
-                 and delete the "Photo coming soon" <span>. The door animation keeps working on top of the photo. -->
-            <button class="frame door-frame" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
-              <canvas class="frame__art" data-seed="313" data-pal="bazaar" aria-hidden="true"></canvas>
-              <span class="frame__label" data-i18n="photo.soon">Photo coming soon</span>
+          <li class="stop stop--punto reveal">
+            <!-- PHOTO: Punto Art Bazaar entrance on Shishman Street (assets/photos/punto-cellist-shishman.jpg/.webp).
+                 Licence plate of the parked car is blurred. Crop tuned in styles.css (.stop--punto .frame__img). -->
+            <button class="frame door-frame door-frame--photo" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
+              <picture><source type="image/webp" srcset="assets/photos/punto-cellist-shishman.webp"><img class="frame__img" src="assets/photos/punto-cellist-shishman.jpg" alt="Copper robot sculpture playing a white cello outside Punto Art Bazaar on Shishman Street" data-i18n-alt="alt.cello" width="1167" height="1600" loading="lazy" decoding="async"></picture>
               <span class="door" aria-hidden="true">
                 <span class="door__leaf door__leaf--l"></span>
                 <span class="door__leaf door__leaf--r"></span>
@@ -224,6 +218,50 @@
             <p class="finale__hint" data-i18n="finale.hint">Go on, tap the canvas. Practice run.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+
+    <!-- ================= GLIMPSES (real photos) ================= -->
+    <section class="section glimpses" id="glimpses" aria-labelledby="glimpses-title">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker" data-i18n="gl.kicker">Glimpses</p>
+          <h2 id="glimpses-title" data-i18n="gl.title">A peek behind the doors</h2>
+          <svg class="brush" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 60 6, 110 20, 160 12 S 250 6, 294 13"/><path class="brush__thin" pathLength="1" d="M30 19 C 90 14, 170 22, 270 17"/></svg>
+          <p class="section__sub" data-i18n="gl.sub">Tap any photo to see it big.</p>
+        </header>
+        <ul class="glimpses__grid reveal" id="glimpses-list">
+          <li class="glimpse g--stair">
+            <button type="button" class="glimpse__btn" data-index="0" data-src="assets/photos/captain-nemo-staircase" data-w="1281" data-h="1600" data-cap="gl.c1" data-alt="alt.stair">
+              <picture><source type="image/webp" srcset="assets/photos/captain-nemo-staircase.webp" sizes="(min-width: 720px) 40vw, 80vw"><img class="glimpse__img" src="assets/photos/captain-nemo-staircase.jpg" alt="Glowing blue glass staircase with brass edges inside Art Gallery Captain Nemo, walls covered in gears and machine parts" data-i18n-alt="alt.stair" width="1281" height="1600" loading="lazy" decoding="async"></picture>
+              <span class="glimpse__cap"><i>01</i><span data-i18n="gl.c1">Art Gallery Captain Nemo</span></span>
+              <span class="glimpse__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg></span>
+            </button>
+          </li>
+          <li class="glimpse g--interior">
+            <button type="button" class="glimpse__btn" data-index="1" data-src="assets/photos/bazaar-interior" data-w="1361" data-h="756" data-cap="gl.c2" data-alt="alt.interior">
+              <picture><source type="image/webp" srcset="assets/photos/bazaar-interior.webp" sizes="(min-width: 720px) 40vw, 80vw"><img class="glimpse__img" src="assets/photos/bazaar-interior.jpg" alt="A shop seen from a mezzanine: olive green wall with clocks and framed pictures, jewellery cases, shelves and a steampunk lamp" data-i18n-alt="alt.interior" width="1361" height="756" loading="lazy" decoding="async"></picture>
+              <span class="glimpse__cap"><i>02</i><span data-i18n="gl.c2">Treasures on every shelf</span></span>
+              <span class="glimpse__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg></span>
+            </button>
+          </li>
+          <li class="glimpse g--cello">
+            <button type="button" class="glimpse__btn" data-index="2" data-src="assets/photos/punto-cellist-shishman" data-w="1167" data-h="1600" data-cap="gl.c3" data-alt="alt.cello">
+              <picture><source type="image/webp" srcset="assets/photos/punto-cellist-shishman.webp" sizes="(min-width: 720px) 40vw, 80vw"><img class="glimpse__img" src="assets/photos/punto-cellist-shishman.jpg" alt="Copper robot sculpture playing a white cello outside Punto Art Bazaar on Shishman Street" data-i18n-alt="alt.cello" width="1167" height="1600" loading="lazy" decoding="async"></picture>
+              <span class="glimpse__cap"><i>03</i><span data-i18n="gl.c3">Punto Art Bazaar, Shishman St.</span></span>
+              <span class="glimpse__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg></span>
+            </button>
+          </li>
+          <li class="glimpse g--rings">
+            <button type="button" class="glimpse__btn" data-index="3" data-src="assets/photos/silver-rings" data-w="1157" data-h="1600" data-cap="gl.c4" data-alt="alt.rings">
+              <picture><source type="image/webp" srcset="assets/photos/silver-rings.webp" sizes="(min-width: 720px) 40vw, 80vw"><img class="glimpse__img" src="assets/photos/silver-rings.jpg" alt="Wooden display box of ornate silver rings: skulls, a lion, a diving helmet and red stones" data-i18n-alt="alt.rings" width="1157" height="1600" loading="lazy" decoding="async"></picture>
+              <span class="glimpse__cap"><i>04</i><span data-i18n="gl.c4">Silver, skulls and secrets</span></span>
+              <span class="glimpse__zoom" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M10.5 8v5M8 10.5h5"/></svg></span>
+            </button>
+          </li>
+        </ul>
+        <p class="glimpses__swipe" aria-hidden="true"><span data-i18n="gl.swipe">Swipe for more</span> <b>→</b></p>
       </div>
     </section>
 
@@ -454,6 +492,18 @@
       <span class="bookbar__meta" data-i18n="bar.meta">2.5 h · up to 8</span>
     </div>
     <a class="btn btn--gold btn--sm js-book" href="#contact" tabindex="-1" data-i18n="bar.book">Book</a>
+  </div>
+
+  <!-- Lightbox for the Glimpses photos -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbCap" hidden>
+    <button type="button" class="lightbox__close" data-i18n-aria="lb.close" aria-label="Close">×</button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" data-i18n-aria="lb.prev" aria-label="Previous photo">‹</button>
+    <figure class="lightbox__fig">
+      <picture><source type="image/webp" id="lbWebp"><img id="lbImg" alt=""></picture>
+      <figcaption><span id="lbCap"></span><small id="lbCount"></small></figcaption>
+    </figure>
+    <button type="button" class="lightbox__nav lightbox__nav--next" data-i18n-aria="lb.next" aria-label="Next photo">›</button>
+    <p class="lightbox__hint" data-i18n="lb.hint">Swipe to browse · tap to close</p>
   </div>
 
   <!-- Full-screen effects layer for paint bursts (decorative, never blocks taps) -->

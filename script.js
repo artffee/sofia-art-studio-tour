@@ -17,6 +17,14 @@ const CONFIG = {
    ========================================================================== */
 const I18N = {
   en: {
+    'gl.kicker': 'Glimpses', 'gl.title': 'A peek behind the doors', 'gl.sub': 'Tap any photo to see it big.', 'gl.swipe': 'Swipe for more',
+    'gl.c1': 'Art Gallery Captain Nemo', 'gl.c2': 'Treasures on every shelf', 'gl.c3': 'Punto Art Bazaar, Shishman St.', 'gl.c4': 'Silver, skulls and secrets',
+    'alt.stair': 'Glowing blue glass staircase with brass edges inside Art Gallery Captain Nemo, walls covered in gears and machine parts',
+    'alt.cello': 'Copper robot sculpture playing a white cello outside Punto Art Bazaar on Shishman Street',
+    'alt.interior': 'A shop seen from a mezzanine: olive green wall with clocks and framed pictures, jewellery cases, shelves and a steampunk lamp',
+    'alt.rings': 'Wooden display box of ornate silver rings: skulls, a lion, a diving helmet and red stones',
+    'lb.close': 'Close', 'lb.prev': 'Previous photo', 'lb.next': 'Next photo', 'lb.hint': 'Swipe to browse · tap to close',
+
     'hero.hintTouch': 'Tap the dark. Throw some paint.', 'hero.hintMouse': 'Click & drag to throw paint',
     'route.sub': 'Tap a door to knock.', 'door.knock': 'Knock, knock', 'door.aria': 'Open or close the door',
     'finale.hint': 'Go on, tap the canvas. Practice run.',
@@ -80,6 +88,14 @@ const I18N = {
     'meta.title': 'Sofia Open Art Studio Tour · IVOSART Studio Walk · Art Gallery Captain Nemo'
   },
   bg: {
+    'gl.kicker': 'Мигове', 'gl.title': 'Надникнете зад вратите', 'gl.sub': 'Докоснете снимка, за да я видите на цял екран.', 'gl.swipe': 'Плъзнете за още',
+    'gl.c1': 'Art Gallery Captain Nemo', 'gl.c2': 'Съкровища на всеки рафт', 'gl.c3': 'Punto Art Bazaar, ул. „Шишман“', 'gl.c4': 'Сребро, черепи и тайни',
+    'alt.stair': 'Светещо синьо стъклено стълбище с месингови ръбове в Art Gallery Captain Nemo, стените са покрити със зъбни колела и машинни части',
+    'alt.cello': 'Медна скулптура на робот, който свири на бяло виолончело пред Punto Art Bazaar на улица „Шишман“',
+    'alt.interior': 'Магазин, гледан от мецанин: маслиненозелена стена с часовници и картини в рамки, витрини с бижута, рафтове и стиймпънк лампа',
+    'alt.rings': 'Дървена витрина с изящни сребърни пръстени: черепи, лъв, водолазен шлем и червени камъни',
+    'lb.close': 'Затвори', 'lb.prev': 'Предишна снимка', 'lb.next': 'Следваща снимка', 'lb.hint': 'Плъзнете за още · докоснете, за да затворите',
+
     'hero.hintTouch': 'Докоснете тъмното. Хвърлете боя.', 'hero.hintMouse': 'Кликнете и плъзнете, за да хвърлите боя',
     'route.sub': 'Докоснете врата, за да почукате.', 'door.knock': 'Чук-чук', 'door.aria': 'Отвори или затвори вратата',
     'finale.hint': 'Хайде, докоснете платното. За загрявка.',
@@ -201,6 +217,7 @@ const I18N = {
     $$('[data-i18n]').forEach(el => { const v = t(el.dataset.i18n); if (v) el.textContent = v; });
     $$('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if (v) el.innerHTML = v; });
     $$('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
+    $$('[data-i18n-alt]').forEach(el => { const v = t(el.dataset.i18nAlt); if (v) el.alt = v; });
     document.dispatchEvent(new CustomEvent('langchange'));
     $$('.lang__btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     document.title = t('meta.title');
@@ -596,5 +613,66 @@ const I18N = {
       setTimeout(() => tk.classList.add('is-picked'), 400);
     });
     document.addEventListener('langchange', renderResult);
+  }
+
+  /* ==========================================================================
+     Glimpses lightbox: tap to open; tap / Esc / swipe down to close;
+     swipe sideways, arrow keys or the ‹ › buttons to browse.
+     ========================================================================== */
+  const lb = $('#lightbox');
+  if (lb) {
+    const items = $$('.glimpse__btn');
+    const img = $('#lbImg'), webp = $('#lbWebp'), cap = $('#lbCap'), count = $('#lbCount');
+    let cur = 0, opener = null, sx = 0, sy = 0, moved = false;
+    const render = () => {
+      const b = items[cur];
+      webp.srcset = b.dataset.src + '.webp';
+      img.src = b.dataset.src + '.jpg'; img.width = +b.dataset.w; img.height = +b.dataset.h;
+      img.alt = t(b.dataset.alt); cap.textContent = t(b.dataset.cap);
+      count.textContent = `${cur + 1} / ${items.length}`;
+    };
+    const go = d => {
+      cur = (cur + d + items.length) % items.length;
+      if (reduce) return render();
+      lb.classList.add('is-swapping');
+      setTimeout(() => { render(); lb.classList.remove('is-swapping'); }, 180);
+    };
+    const open = i => {
+      cur = i; opener = document.activeElement; render();
+      lb.hidden = false; document.body.style.overflow = 'hidden';
+      $('.lightbox__close', lb).focus({ preventScroll: true });
+    };
+    const close = () => {
+      if (lb.hidden) return;
+      lb.hidden = true; document.body.style.overflow = '';
+      if (opener) opener.focus({ preventScroll: true });
+    };
+    items.forEach((b, i) => b.addEventListener('click', () => open(i)));
+    $('.lightbox__close', lb).addEventListener('click', e => { e.stopPropagation(); close(); });
+    $('.lightbox__nav--prev', lb).addEventListener('click', e => { e.stopPropagation(); go(-1); });
+    $('.lightbox__nav--next', lb).addEventListener('click', e => { e.stopPropagation(); go(1); });
+    lb.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; moved = false; });
+    lb.addEventListener('pointerup', e => {
+      if (e.target.closest('.lightbox__nav, .lightbox__close')) return;
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { moved = true; go(dx < 0 ? 1 : -1); }
+      else if (Math.abs(dy) > 60) { moved = true; close(); }
+    });
+    lb.addEventListener('click', e => {
+      if (e.target.closest('.lightbox__nav, .lightbox__close')) return;
+      if (!moved) close();
+      moved = false;
+    });
+    addEventListener('keydown', e => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') go(1);
+      else if (e.key === 'ArrowLeft') go(-1);
+      else if (e.key === 'Tab') {                                       // keep focus inside
+        const f = $$('button', lb); const i = f.indexOf(document.activeElement);
+        e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    document.addEventListener('langchange', () => { if (!lb.hidden) render(); });
   }
 })();

@@ -496,3 +496,84 @@ h3{font-size:1.2rem;line-height:1.3}
 .hero .paint-layer{z-index:0}
 .hero__content{position:relative;z-index:1}
 .hero__hint,.hero__scroll{z-index:2}
+
+/* ==========================================================================
+   v3 · REAL PHOTOS — route doors, Glimpses gallery, lightbox
+   ========================================================================== */
+.door-frame .frame__img,.door-frame picture{position:absolute;inset:0;width:100%;height:100%}
+.door-frame .frame__img{object-fit:cover;transition:transform 2.4s var(--ease),filter 1.2s}
+.door-frame--photo{aspect-ratio:4/5}
+.door-frame--photo::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(11,10,9,0) 55%,rgba(11,10,9,.55));box-shadow:inset 0 0 0 1px rgba(212,176,98,.18)}
+.door-frame--photo:not(.is-open) .frame__img{transform:scale(1.08);filter:brightness(.6)}
+.door-frame--photo.is-open .frame__img{transform:scale(1);filter:none}
+.stop--nemo .frame__img{object-position:50% 62%}
+.stop--punto .frame__img{object-position:45% 40%}
+@media (min-width:720px){ .stops{align-items:stretch} .door-frame--photo,.stops .door-frame{aspect-ratio:4/5} }
+
+/* Glimpses */
+.glimpses{--sec:var(--cobalt);overflow:hidden;isolation:isolate;background:linear-gradient(180deg,var(--ink),#0e0d0d 50%,var(--ink))}
+.glimpses::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:70vmax;height:70vmax;border-radius:50%;filter:blur(40px);
+  right:-35vmax;top:0;background:radial-gradient(closest-side,var(--cobalt),transparent 70%);opacity:.16}
+.glimpses__grid{list-style:none;margin:0;padding:4px 20px 18px;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;margin-inline:-20px;overscroll-behavior-x:contain}
+.glimpses__grid::-webkit-scrollbar{display:none}
+.glimpse{flex:0 0 78%;scroll-snap-align:center;position:relative}
+.glimpse__btn{display:block;position:relative;width:100%;aspect-ratio:4/5;padding:0;border:1px solid var(--gold-hair);background:#0e0d0c;cursor:zoom-in;overflow:hidden;color:inherit;font:inherit}
+.glimpse__btn picture,.glimpse__img{position:absolute;inset:0;width:100%;height:100%}
+.glimpse__img{object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
+.glimpse__btn::before{content:"";position:absolute;inset:8px;z-index:2;border:1px solid rgba(212,176,98,.28);pointer-events:none;transition:inset .5s var(--ease)}
+.glimpse__btn::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 50%,rgba(8,7,6,.85));pointer-events:none}
+.glimpse__btn:hover .glimpse__img{transform:scale(1.05)}
+.glimpse__btn:hover::before{inset:14px}
+.g--stair .glimpse__img{object-position:50% 60%}
+.g--interior .glimpse__img{object-position:48% 50%}
+.g--cello .glimpse__img{object-position:45% 45%}
+.g--rings .glimpse__img{object-position:50% 55%}
+.glimpse__cap{position:absolute;left:20px;right:20px;bottom:18px;z-index:3;display:flex;align-items:baseline;gap:10px;text-align:left;
+  font-family:var(--serif);font-style:italic;font-size:1.15rem;line-height:1.25;color:var(--bone)}
+.glimpse__cap i{font-style:normal;font-family:'Cinzel',serif;color:var(--gold);font-size:.8rem}
+.glimpse__zoom{position:absolute;right:16px;top:16px;z-index:3;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(11,10,9,.6);border:1px solid var(--gold-hair)}
+.glimpse__zoom svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.5}
+.glimpses__swipe{text-align:center;margin:8px 0 0;font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+.glimpses__swipe b{color:var(--gold);display:inline-block;animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:none}50%{transform:translateX(6px)}}
+@media (min-width:720px){
+  .glimpses__grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,300px));overflow:visible;margin:0;padding:0;gap:16px}
+  .glimpse{flex:none}
+  .glimpse__btn{aspect-ratio:auto;height:100%}
+  .g--stair{grid-row:1/3}
+  .g--interior{grid-column:2/4}
+  .glimpses__swipe{display:none}
+}
+@media (min-width:1200px){ .glimpses__grid{grid-template-rows:repeat(2,minmax(0,330px))} }
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;z-index:120;background:rgba(6,5,5,.96);display:flex;align-items:center;justify-content:center;
+  padding:56px 12px 64px;touch-action:none;animation:lbIn .35s var(--ease)}
+.lightbox[hidden]{display:none}
+@keyframes lbIn{from{opacity:0}to{opacity:1}}
+.lightbox__fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:100%;max-height:100%}
+.lightbox__fig img{display:block;max-width:min(94vw,1200px);max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);width:auto;height:auto;
+  border:1px solid var(--gold-hair);box-shadow:0 30px 80px rgba(0,0,0,.7);transition:opacity .25s,transform .35s var(--ease)}
+.lightbox.is-swapping .lightbox__fig img{opacity:0;transform:scale(.97)}
+.lightbox figcaption{display:flex;gap:14px;align-items:baseline;font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--bone);text-align:center}
+.lightbox figcaption small{font:500 .62rem/1 var(--sans);letter-spacing:.24em;color:var(--gold);font-style:normal}
+.lightbox__close,.lightbox__nav{position:absolute;z-index:2;background:rgba(11,10,9,.7);border:1px solid var(--gold-dim);color:var(--gold);cursor:pointer;
+  width:46px;height:46px;display:grid;place-items:center;font:300 1.9rem/1 var(--sans);border-radius:50%;transition:background .3s}
+.lightbox__close:hover,.lightbox__nav:hover{background:rgba(212,176,98,.15)}
+.lightbox__close{top:12px;right:12px}
+.lightbox__nav--prev{left:12px;top:50%;transform:translateY(-50%)}
+.lightbox__nav--next{right:12px;top:50%;transform:translateY(-50%)}
+.lightbox__hint{position:absolute;bottom:14px;left:0;right:0;text-align:center;margin:0;font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+@media (max-width:719px){ .lightbox__nav{top:auto;bottom:40px;transform:none;width:42px;height:42px} .lightbox__nav--prev{left:16px} .lightbox__nav--next{right:16px} .lightbox__hint{bottom:54px} }
+@media (min-width:720px){ .lightbox__hint{display:none} }
+
+/* Captain Nemo Night card: the staircase as a dim, candle-lit backdrop */
+.ticket--night{isolation:isolate}
+.ticket--night::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(16,13,10,.80),rgba(16,13,10,.93) 45%,rgba(16,13,10,.98)),
+    url("assets/photos/captain-nemo-staircase.jpg") 50% 70%/cover no-repeat;
+  background:linear-gradient(180deg,rgba(16,13,10,.80),rgba(16,13,10,.93) 45%,rgba(16,13,10,.98)),
+    image-set(url("assets/photos/captain-nemo-staircase.webp") type("image/webp"),url("assets/photos/captain-nemo-staircase.jpg") type("image/jpeg")) 50% 70%/cover no-repeat}
+@media (prefers-reduced-motion:reduce){ .door-frame--photo .frame__img{transform:none;filter:none} .glimpses__swipe b{animation:none} }
