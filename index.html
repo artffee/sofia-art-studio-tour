@@ -64,23 +64,6 @@
 <body>
   <!-- Brush-stroke scroll progress -->
   <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-  <!-- Steampunk door parts (route doors): gears, valve wheel and metal gradients. Pure SVG, referenced with <use>. -->
-  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="sp-brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4d995"/><stop offset=".45" stop-color="#c39443"/><stop offset="1" stop-color="#6d4c1d"/></linearGradient>
-      <linearGradient id="sp-copper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7a57a"/><stop offset=".5" stop-color="#a5552c"/><stop offset="1" stop-color="#55260f"/></linearGradient>
-      <radialGradient id="sp-hub" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#fff0c2"/><stop offset=".5" stop-color="#c79a4a"/><stop offset="1" stop-color="#5a3d16"/></radialGradient>
-      <symbol id="sp-gear" viewBox="-52 -52 104 104"><path fill="url(#sp-brass)" fill-rule="evenodd" stroke="#3a2610" stroke-width="1.6" d="M42.0 0.0 L49.9 3.5 L49.0 9.8 L40.5 11.1 L38.8 16.1 L44.7 22.3 L41.6 27.8 L33.2 25.7 L29.7 29.7 L32.8 37.8 L27.8 41.6 L20.8 36.5 L16.1 38.8 L15.8 47.4 L9.8 49.0 L5.3 41.7 L0.0 42.0 L-3.5 49.9 L-9.8 49.0 L-11.1 40.5 L-16.1 38.8 L-22.3 44.7 L-27.8 41.6 L-25.7 33.2 L-29.7 29.7 L-37.8 32.8 L-41.6 27.8 L-36.5 20.8 L-38.8 16.1 L-47.4 15.8 L-49.0 9.8 L-41.7 5.3 L-42.0 0.0 L-49.9 -3.5 L-49.0 -9.8 L-40.5 -11.1 L-38.8 -16.1 L-44.7 -22.3 L-41.6 -27.8 L-33.2 -25.7 L-29.7 -29.7 L-32.8 -37.8 L-27.8 -41.6 L-20.8 -36.5 L-16.1 -38.8 L-15.8 -47.4 L-9.8 -49.0 L-5.3 -41.7 L-0.0 -42.0 L3.5 -49.9 L9.8 -49.0 L11.1 -40.5 L16.1 -38.8 L22.3 -44.7 L27.8 -41.6 L25.7 -33.2 L29.7 -29.7 L37.8 -32.8 L41.6 -27.8 L36.5 -20.8 L38.8 -16.1 L47.4 -15.8 L49.0 -9.8 L41.7 -5.3 Z M32.5 0.0 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M20.0 21.7 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M-5.0 21.7 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M-17.5 0.0 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M-5.0 -21.7 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M20.0 -21.7 a7.5 7.5 0 1 0 -15.0 0 a7.5 7.5 0 1 0 15.0 0 Z M6.0 0.0 a6 6 0 1 0 -12 0 a6 6 0 1 0 12 0 Z"/><circle r="16" fill="none" stroke="#3a2610" stroke-width="1.4" opacity=".55"/><circle r="34" fill="none" stroke="#fff3cf" stroke-width=".8" opacity=".35"/></symbol>
-      <symbol id="sp-gear-s" viewBox="-52 -52 104 104"><path fill="url(#sp-copper)" fill-rule="evenodd" stroke="#3a1a0a" stroke-width="2" d="M39.0 0.0 L49.7 5.6 L47.6 15.5 L35.5 16.2 L31.6 22.9 L36.9 33.8 L29.4 40.5 L19.2 33.9 L12.1 37.1 L10.0 49.0 L0.0 50.0 L-4.4 38.8 L-12.1 37.1 L-20.7 45.5 L-29.4 40.5 L-26.3 28.8 L-31.6 22.9 L-43.5 24.6 L-47.6 15.5 L-38.2 7.8 L-39.0 0.0 L-49.7 -5.6 L-47.6 -15.5 L-35.5 -16.2 L-31.6 -22.9 L-36.9 -33.8 L-29.4 -40.5 L-19.2 -33.9 L-12.1 -37.1 L-10.0 -49.0 L-0.0 -50.0 L4.4 -38.8 L12.1 -37.1 L20.7 -45.5 L29.4 -40.5 L26.3 -28.8 L31.6 -22.9 L43.5 -24.6 L47.6 -15.5 L38.2 -7.8 Z M30.0 0.0 a7 7 0 1 0 -14 0 a7 7 0 1 0 14 0 Z M14.1 21.9 a7 7 0 1 0 -14 0 a7 7 0 1 0 14 0 Z M-11.6 13.5 a7 7 0 1 0 -14 0 a7 7 0 1 0 14 0 Z M-11.6 -13.5 a7 7 0 1 0 -14 0 a7 7 0 1 0 14 0 Z M14.1 -21.9 a7 7 0 1 0 -14 0 a7 7 0 1 0 14 0 Z M6.0 0.0 a6 6 0 1 0 -12 0 a6 6 0 1 0 12 0 Z"/><circle r="14" fill="none" stroke="#2a1206" stroke-width="1.6" opacity=".5"/></symbol>
-      <symbol id="sp-valve" viewBox="-52 -52 104 104">
-        <circle r="41" fill="none" stroke="#3a1a0a" stroke-width="13"/><circle r="41" fill="none" stroke="url(#sp-copper)" stroke-width="10"/>
-        <g fill="url(#sp-copper)" stroke="#3a1a0a" stroke-width="1.5"><circle cx="41.0" cy="0.0" r="6.5"/><circle cx="29.0" cy="29.0" r="6.5"/><circle cx="0.0" cy="41.0" r="6.5"/><circle cx="-29.0" cy="29.0" r="6.5"/><circle cx="-41.0" cy="0.0" r="6.5"/><circle cx="-29.0" cy="-29.0" r="6.5"/><circle cx="-0.0" cy="-41.0" r="6.5"/><circle cx="29.0" cy="-29.0" r="6.5"/></g>
-        <g stroke="#3a1a0a" stroke-width="9" stroke-linecap="round"><path d="M0 -38V38M-38 0H38"/></g>
-        <g stroke="url(#sp-brass)" stroke-width="6" stroke-linecap="round"><path d="M0 -38V38M-38 0H38"/></g>
-        <circle r="12" fill="url(#sp-hub)" stroke="#3a2610" stroke-width="1.6"/><circle r="4" fill="#2a1a0a"/>
-      </symbol>
-    </defs>
-  </svg>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
   <!-- ================= HEADER / NAV ================= -->
@@ -223,22 +206,10 @@
                  Crop is tuned with object-position in styles.css (.stop--nemo .frame__img). -->
             <button class="frame door-frame door-frame--photo" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
               <picture><source type="image/webp" srcset="assets/photos/captain-nemo-staircase.webp"><img class="frame__img" src="assets/photos/captain-nemo-staircase.jpg" alt="Glowing blue glass staircase with brass edges inside Art Gallery Captain Nemo, walls covered in gears and machine parts" data-i18n-alt="alt.stair" width="1281" height="1600" loading="lazy" decoding="async"></picture>
-              <span class="door door--steam" aria-hidden="true">
-                <span class="door__leaf door__leaf--l">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__pipe"></span>
-                  <span class="door__bolt"></span>
-                  <svg class="door__gear door__gear--big"><use href="#sp-gear"/></svg>
-                </span>
-                <span class="door__leaf door__leaf--r">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__keeper"></span>
-                  <span class="door__gauge"><span class="door__needle"></span></span>
-                  <svg class="door__gear door__gear--small"><use href="#sp-gear-s"/></svg>
-                  <svg class="door__valve"><use href="#sp-valve"/></svg>
-                </span>
-                <span class="door__num">I</span>
-                <span class="door__knock" data-i18n="door.knock">Knock, knock</span>
+              <!-- Door art: AI-generated decorative steampunk doors (assets/doors/door-i.*), not a photo of the venue. -->
+              <span class="door door--art door--i" aria-hidden="true">
+                <span class="door__leaf door__leaf--l"><span class="door__num">I</span></span>
+                <span class="door__leaf door__leaf--r"><span class="door__num">I</span></span>
                 <span class="door__steam"><span></span><span></span><span></span></span>
               </span>
             </button>
@@ -256,22 +227,10 @@
             <button class="frame door-frame" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
               <canvas class="frame__art" data-seed="212" data-pal="studio" aria-hidden="true"></canvas>
               <span class="frame__label" data-i18n="photo.soon">Photo coming soon</span>
-              <span class="door door--steam" aria-hidden="true">
-                <span class="door__leaf door__leaf--l">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__pipe"></span>
-                  <span class="door__bolt"></span>
-                  <svg class="door__gear door__gear--big"><use href="#sp-gear"/></svg>
-                </span>
-                <span class="door__leaf door__leaf--r">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__keeper"></span>
-                  <span class="door__gauge"><span class="door__needle"></span></span>
-                  <svg class="door__gear door__gear--small"><use href="#sp-gear-s"/></svg>
-                  <svg class="door__valve"><use href="#sp-valve"/></svg>
-                </span>
-                <span class="door__num">II</span>
-                <span class="door__knock" data-i18n="door.knock">Knock, knock</span>
+              <!-- Door art: AI-generated decorative steampunk doors (assets/doors/door-ii.*), not a photo of the venue. -->
+              <span class="door door--art door--ii" aria-hidden="true">
+                <span class="door__leaf door__leaf--l"><span class="door__num">II</span></span>
+                <span class="door__leaf door__leaf--r"><span class="door__num">II</span></span>
                 <span class="door__steam"><span></span><span></span><span></span></span>
               </span>
             </button>
@@ -286,22 +245,10 @@
                  Licence plate of the parked car is blurred. Crop tuned in styles.css (.stop--punto .frame__img). -->
             <button class="frame door-frame door-frame--photo" type="button" aria-expanded="false" data-i18n-aria="door.aria" aria-label="Open the door">
               <picture><source type="image/webp" srcset="assets/photos/punto-cellist-shishman.webp"><img class="frame__img" src="assets/photos/punto-cellist-shishman.jpg" alt="Copper robot sculpture playing a white cello outside Punto Art Bazaar on Shishman Street" data-i18n-alt="alt.cello" width="1167" height="1600" loading="lazy" decoding="async"></picture>
-              <span class="door door--steam" aria-hidden="true">
-                <span class="door__leaf door__leaf--l">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__pipe"></span>
-                  <span class="door__bolt"></span>
-                  <svg class="door__gear door__gear--big"><use href="#sp-gear"/></svg>
-                </span>
-                <span class="door__leaf door__leaf--r">
-                  <span class="door__band door__band--t"></span><span class="door__band door__band--b"></span>
-                  <span class="door__keeper"></span>
-                  <span class="door__gauge"><span class="door__needle"></span></span>
-                  <svg class="door__gear door__gear--small"><use href="#sp-gear-s"/></svg>
-                  <svg class="door__valve"><use href="#sp-valve"/></svg>
-                </span>
-                <span class="door__num">III</span>
-                <span class="door__knock" data-i18n="door.knock">Knock, knock</span>
+              <!-- Door art: AI-generated decorative steampunk doors (assets/doors/door-iii.*), not a photo of the venue. -->
+              <span class="door door--art door--iii" aria-hidden="true">
+                <span class="door__leaf door__leaf--l"><span class="door__num">III</span></span>
+                <span class="door__leaf door__leaf--r"><span class="door__num">III</span></span>
                 <span class="door__steam"><span></span><span></span><span></span></span>
               </span>
             </button>
