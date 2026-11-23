@@ -27,6 +27,14 @@ Run locally: `python3 -m http.server 8080` in this folder, then open http://loca
 
 Deploy: import the repo into Vercel (Framework preset: **Other**, no build command, output = root). It works as-is.
 
+## Interactive bits (`interactive.js`)
+
+- **Mini paint studio** (finale): 8 colours, small/medium/large, splatter and drip brushes, undo, clear, and "Save my masterpiece" PNG download with an IVOSART · Studio Walk signature.
+- **Illustrated route map**: hand-drawn, not to scale, I → II → III → wine & canvas. The path draws itself as you scroll, and tapping a stop opens its card.
+- **Candle mode**: the nav flame or "Preview it by candlelight" on the Night ticket dims the page to a flickering candle circle. Esc or the button turns it off; with reduced motion it is a plain dim.
+- **Booking request builder** (contact): evening, date, guests (max 8 / 6), language, name, and note. It builds a WhatsApp or email message from `CONFIG`; until those are filled in, it shows "to be added".
+- Small delights: brush-stroke scroll progress, gallery tilt (mouse or gyro), light haptics while painting, and tapping the cello plays a soft synthesized note.
+
 ## Things to fill in
 
 ### 1. Contact and booking (top of `script.js`)

@@ -17,6 +17,38 @@ const CONFIG = {
    ========================================================================== */
 const I18N = {
   en: {
+    'candle.toggle': 'Candle mode', 'candle.try': 'Preview it by candlelight', 'candle.exit': 'Blow out the candle',
+    'candle.on': 'Candle mode. Move your finger or cursor to light the way.',
+    'map.title': 'Illustrated route, not to scale', 'map.shishman': 'Shishman St.', 'map.fin': 'Wine & canvas',
+    'map.note': 'Not to scale. Drawn with a brush, not a GPS. Tap a stop.', 'map.go': 'Take me there',
+    'map.s0aria': 'Door I: Art Gallery Captain Nemo', 'map.s1aria': 'Door II: A02x Studio', 'map.s2aria': 'Door III: Punto Art Bazaar, Shishman St.', 'map.s3aria': 'Finale: wine and your own canvas',
+    'map.door': 'Door', 'map.finName': 'Wine & a fresh canvas',
+    'studio.kicker': 'Mini paint studio', 'studio.title': 'Warm up before the real canvas',
+    'studio.sub': 'Pick a colour, pick a brush, make a glorious mess. Then keep it.', 'studio.empty': 'Paint here',
+    'studio.aria': 'Your painting', 'studio.colours': 'Colours', 'studio.brushes': 'Brushes',
+    'studio.undo': 'Undo', 'studio.clear': 'Clear', 'studio.save': 'Save my masterpiece',
+    'studio.saved': 'Saved. Frame it, obviously.', 'studio.cleared': 'Fresh canvas.',
+    'col.crimson': 'Crimson', 'col.cobalt': 'Cobalt blue', 'col.teal': 'Teal', 'col.magenta': 'Magenta', 'col.ochre': 'Ochre', 'col.gold': 'Gold', 'col.ink': 'Ink black', 'col.bone': 'Bone white',
+    'br.s': 'Small', 'br.m': 'Medium', 'br.l': 'Large', 'br.splat': 'Splatter', 'br.drip': 'Drip',
+    'tilt.ask': 'Tilt the photos with your phone',
+    'cello.aria': 'Play a cello note', 'cello.hint': 'Tap ♪ on the photo to hear the cellist.',
+    'bk.kicker': 'Booking request', 'bk.evening': '1 · Choose your evening',
+    'bk.walkMeta': '€40 as listed · up to 8 guests · 2.5 hours', 'bk.nightMeta': '€75 as listed · up to 6 guests · 3 hours',
+    'bk.date': '2 · Preferred date', 'bk.guests': '3 · Guests', 'bk.max': 'Up to {n} guests for this evening',
+    'bk.less': 'One fewer guest', 'bk.more': 'One more guest',
+    'bk.lang': '4 · Tour language', 'bk.en': 'English', 'bk.bg': 'Bulgarian',
+    'bk.name': '5 · Your name', 'bk.note': 'Note (optional)', 'bk.notePh': 'Birthday, couple, team event…',
+    'bk.preview': 'Your message, ready to send',
+    'bk.wa': 'Send via WhatsApp', 'bk.mail': 'Send via email', 'bk.copy': 'Copy message', 'bk.copied': 'Copied. Paste it wherever you like.',
+    'bk.waTodo': 'WhatsApp · to be added', 'bk.mailTodo': 'Email · to be added',
+    'bk.todoErr': 'This contact is still to be added. Copy the message for now.',
+    'bk.errDate': 'Please pick a date (today or later).', 'bk.errName': 'Please add your name.',
+    'bk.fine': 'This only prepares a message for you to send. No payment is taken here.',
+    'bk.msg.hello': 'Hello Ivaylo,', 'bk.msg.intro': 'I\u2019d like to request a booking for the Sofia Open Art Studio Tour:',
+    'bk.msg.evening': 'Evening', 'bk.msg.price': 'listed price', 'bk.msg.date': 'Preferred date', 'bk.msg.guests': 'Guests',
+    'bk.msg.lang': 'Tour language', 'bk.msg.name': 'Name', 'bk.msg.note': 'Note', 'bk.msg.thanks': 'Thank you!',
+    'bk.msg.subject': 'Booking request · {tier} · {date}', 'bk.dateTbd': '(not chosen yet)',
+
     'gl.kicker': 'Glimpses', 'gl.title': 'A peek behind the doors', 'gl.sub': 'Tap any photo to see it big.', 'gl.swipe': 'Swipe for more',
     'gl.c1': 'Art Gallery Captain Nemo', 'gl.c2': 'Treasures on every shelf', 'gl.c3': 'Punto Art Bazaar, Shishman St.', 'gl.c4': 'Silver, skulls and secrets',
     'alt.stair': 'Glowing blue glass staircase with brass edges inside Art Gallery Captain Nemo, walls covered in gears and machine parts',
@@ -88,6 +120,38 @@ const I18N = {
     'meta.title': 'Sofia Open Art Studio Tour · IVOSART Studio Walk · Art Gallery Captain Nemo'
   },
   bg: {
+    'candle.toggle': 'Режим на свещи', 'candle.try': 'Вижте я на свещи', 'candle.exit': 'Духнете свещта',
+    'candle.on': 'Режим на свещи. Движете пръст или курсор, за да осветите пътя.',
+    'map.title': 'Илюстриран маршрут, не е в мащаб', 'map.shishman': 'ул. „Шишман“', 'map.fin': 'Вино и платно',
+    'map.note': 'Не е в мащаб. Рисувано с четка, не с GPS. Докоснете спирка.', 'map.go': 'Заведи ме там',
+    'map.s0aria': 'Врата I: Art Gallery Captain Nemo', 'map.s1aria': 'Врата II: A02x Studio', 'map.s2aria': 'Врата III: Punto Art Bazaar, ул. „Шишман“', 'map.s3aria': 'Финал: вино и вашето собствено платно',
+    'map.door': 'Врата', 'map.finName': 'Вино и ново платно',
+    'studio.kicker': 'Мини ателие', 'studio.title': 'Загрейте преди истинското платно',
+    'studio.sub': 'Изберете цвят, изберете четка и направете великолепна бъркотия. После я запазете.', 'studio.empty': 'Рисувайте тук',
+    'studio.aria': 'Вашата картина', 'studio.colours': 'Цветове', 'studio.brushes': 'Четки',
+    'studio.undo': 'Назад', 'studio.clear': 'Изчисти', 'studio.save': 'Запази шедьовъра ми',
+    'studio.saved': 'Запазено. Сложете го в рамка, разбира се.', 'studio.cleared': 'Ново платно.',
+    'col.crimson': 'Пурпурно', 'col.cobalt': 'Кобалтово синьо', 'col.teal': 'Тюркоазено', 'col.magenta': 'Маджента', 'col.ochre': 'Охра', 'col.gold': 'Златно', 'col.ink': 'Мастилено черно', 'col.bone': 'Костено бяло',
+    'br.s': 'Малка', 'br.m': 'Средна', 'br.l': 'Голяма', 'br.splat': 'Пръски', 'br.drip': 'Стичане',
+    'tilt.ask': 'Наклонете снимките с телефона си',
+    'cello.aria': 'Изсвири нота на виолончело', 'cello.hint': 'Докоснете ♪ върху снимката, за да чуете челиста.',
+    'bk.kicker': 'Заявка за резервация', 'bk.evening': '1 · Изберете вечерта',
+    'bk.walkMeta': 'Обявена цена €40 · до 8 гости · 2,5 часа', 'bk.nightMeta': 'Обявена цена €75 · до 6 гости · 3 часа',
+    'bk.date': '2 · Желана дата', 'bk.guests': '3 · Брой гости', 'bk.max': 'До {n} гости за тази вечер',
+    'bk.less': 'Един гост по-малко', 'bk.more': 'Един гост повече',
+    'bk.lang': '4 · Език на тура', 'bk.en': 'Английски', 'bk.bg': 'Български',
+    'bk.name': '5 · Вашето име', 'bk.note': 'Бележка (по желание)', 'bk.notePh': 'Рожден ден, двойка, фирмено събитие…',
+    'bk.preview': 'Вашето съобщение, готово за изпращане',
+    'bk.wa': 'Изпрати през WhatsApp', 'bk.mail': 'Изпрати по имейл', 'bk.copy': 'Копирай съобщението', 'bk.copied': 'Копирано. Поставете го където пожелаете.',
+    'bk.waTodo': 'WhatsApp · предстои', 'bk.mailTodo': 'Имейл · предстои',
+    'bk.todoErr': 'Този контакт предстои да бъде добавен. Засега копирайте съобщението.',
+    'bk.errDate': 'Моля, изберете дата (днес или по-късно).', 'bk.errName': 'Моля, добавете името си.',
+    'bk.fine': 'Това само подготвя съобщение, което да изпратите. Тук не се извършва плащане.',
+    'bk.msg.hello': 'Здравей, Ивайло,', 'bk.msg.intro': 'Бих искал(а) да заявя резервация за арт тура из ателиетата на София:',
+    'bk.msg.evening': 'Вечер', 'bk.msg.price': 'обявена цена', 'bk.msg.date': 'Желана дата', 'bk.msg.guests': 'Гости',
+    'bk.msg.lang': 'Език на тура', 'bk.msg.name': 'Име', 'bk.msg.note': 'Бележка', 'bk.msg.thanks': 'Благодаря!',
+    'bk.msg.subject': 'Заявка за резервация · {tier} · {date}', 'bk.dateTbd': '(още не е избрана)',
+
     'gl.kicker': 'Мигове', 'gl.title': 'Надникнете зад вратите', 'gl.sub': 'Докоснете снимка, за да я видите на цял екран.', 'gl.swipe': 'Плъзнете за още',
     'gl.c1': 'Art Gallery Captain Nemo', 'gl.c2': 'Съкровища на всеки рафт', 'gl.c3': 'Punto Art Bazaar, ул. „Шишман“', 'gl.c4': 'Сребро, черепи и тайни',
     'alt.stair': 'Светещо синьо стъклено стълбище с месингови ръбове в Art Gallery Captain Nemo, стените са покрити със зъбни колела и машинни части',
@@ -218,6 +282,7 @@ const I18N = {
     $$('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if (v) el.innerHTML = v; });
     $$('[data-i18n-aria]').forEach(el => el.setAttribute('aria-label', t(el.dataset.i18nAria)));
     $$('[data-i18n-alt]').forEach(el => { const v = t(el.dataset.i18nAlt); if (v) el.alt = v; });
+    $$('[data-i18n-ph]').forEach(el => { const v = t(el.dataset.i18nPh); if (v) el.placeholder = v; });
     document.dispatchEvent(new CustomEvent('langchange'));
     $$('.lang__btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     document.title = t('meta.title');
@@ -519,6 +584,7 @@ const I18N = {
         const s = 12 + R() * 22, c = cv.getContext('2d');
         splat(c, last[0], last[1], s, col);
         burst(e.clientX, e.clientY, { n: 16, col, power: 7, land: cv, size: 3.5 });
+        if (navigator.vibrate) try { navigator.vibrate(8); } catch (_) {}
         goneHint();
       }
       last = null;
@@ -528,7 +594,6 @@ const I18N = {
     area.addEventListener('pointerleave', () => { if (finePointer) { down = false; last = null; } });
   }
   attachPainter($('.hero'), $('#heroPaint'), $('#heroHint'));
-  attachPainter($('.finale'), $('#finalePaint'));
   // the hint politely leaves after a while even if nobody paints
   setTimeout(() => $('#heroHint')?.classList.add('is-gone'), 14000);
 
@@ -561,6 +626,7 @@ const I18N = {
   // --- route doors ----------------------------------------------------------
   const doors = $$('.door-frame');
   const setDoor = (d, open) => { d.classList.toggle('is-open', open); d.setAttribute('aria-expanded', String(open)); };
+  window.IVO_openDoor = i => { const d = doors[i]; if (d && !d.classList.contains('is-open')) { d.classList.add('is-knock'); setTimeout(() => setDoor(d, true), reduce ? 0 : 300); } };
   if (reduce) doors.forEach(d => setDoor(d, true));
   else {
     const dObs = new IntersectionObserver(entries => entries.forEach(en => {
@@ -630,6 +696,7 @@ const I18N = {
       img.src = b.dataset.src + '.jpg'; img.width = +b.dataset.w; img.height = +b.dataset.h;
       img.alt = t(b.dataset.alt); cap.textContent = t(b.dataset.cap);
       count.textContent = `${cur + 1} / ${items.length}`;
+      document.dispatchEvent(new CustomEvent('lbrender', { detail: { index: cur, src: b.dataset.src } }));
     };
     const go = d => {
       cur = (cur + d + items.length) % items.length;
@@ -675,4 +742,9 @@ const I18N = {
     });
     document.addEventListener('langchange', () => { if (!lb.hidden) render(); });
   }
+
+  /* Small API for interactive.js */
+  window.IVO = { t, burst, splat, reduce, finePointer, BOLD, mailto, wa, toast: (k, ms = 2600) => {
+    toast.textContent = t(k); toast.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(() => toast.classList.remove('is-on'), ms); },
+    lang: () => lang, openDoor: i => window.IVO_openDoor(i) };
 })();
