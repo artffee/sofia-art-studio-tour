@@ -50,6 +50,10 @@ Hero → Route (with the paint studio, which previews the finale) → Glimpses �
 - The page is marked `translate="no"` / `<meta name="google" content="notranslate">` so Chrome's auto-translate can't undo the BG switch.
 - EN/BG switches live in the header (44px tap targets) and at the bottom of the phone menu. Stored choice: `localStorage` `ivosart-lang` (any value other than `en`/`bg` is ignored).
 
+## Visitor stats (private)
+
+Vercel Web Analytics and Speed Insights are on for the project and loaded in `index.html` with the static-site snippet (`/_vercel/insights/script.js`, `/_vercel/speed-insights/script.js`). Stats are visible only in the Vercel dashboard (Analytics / Speed Insights tabs); nothing is shown on the site. The scripts only load on Vercel, so locally they 404 harmlessly.
+
 ## Interactive bits (`interactive.js`)
 
 - **Mini paint studio** (finale): 8 colours, small/medium/large, splatter and drip brushes, undo, clear, and "Save my masterpiece" PNG download with an IVOSART · Studio Walk signature.
