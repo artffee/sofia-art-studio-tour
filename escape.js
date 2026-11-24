@@ -92,7 +92,7 @@
     S.solved[i] = true; save(); render();
     say('esc.m.key', { d: DIGITS[i] }, 'win');
     const k = $$('.esc__key')[i]; k.classList.add('is-new'); setTimeout(() => k.classList.remove('is-new'), 1400);
-    const r = k.getBoundingClientRect(); IVO.burst(r.left + r.width / 2, r.top + r.height / 2, { n: 18, power: 6, size: 3, col: '#d4b062' });
+    const r = k.getBoundingClientRect(); IVO.burst(r.left + r.width / 2, r.top + r.height / 2, { n: 18, power: 6, size: 3, col: '#e8ebef' });
     buzz([12, 40, 12]);
   };
 

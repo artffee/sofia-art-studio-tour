@@ -29,6 +29,17 @@ Run locally: `python3 -m http.server 8080` in this folder, then open http://loca
 
 Deploy: import the repo into Vercel (Framework preset: **Other**, no build command, output = root). It works as-is.
 
+## Look and feel
+
+The site uses a contemporary-gallery palette (`:root` in `styles.css`, block `v11 · PROFESSIONAL`):
+
+- charcoal backgrounds `#0e1013` / `#14171b` / `#1b1f24`
+- ivory text `#f4f3ef` (secondary `#c9ccd1`, muted `#9aa0a8`)
+- platinum lines and icons `#c9ced6` / `#e8ebef`
+- a single crimson accent `#c8102e` (hover `#a30c25`, `#f0596c` for accent text on dark), used for booking buttons and small highlights
+
+The route door pictures are gunmetal duotones. The earlier brass/steampunk look is kept under the git tag `brass-theme`.
+
 ## Interactive bits (`interactive.js`)
 
 - **Mini paint studio** (finale): 8 colours, small/medium/large, splatter and drip brushes, undo, clear, and "Save my masterpiece" PNG download with an IVOSART · Studio Walk signature.

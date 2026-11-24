@@ -164,19 +164,19 @@
       out.width = cv.width; out.height = cv.height;
       const o = out.getContext('2d'), s0 = out.width / 1000 * 2;
       o.fillStyle = '#f2ece0'; o.fillRect(0, 0, out.width, out.height);       // the fresh canvas
-      o.globalAlpha = .05; o.strokeStyle = '#6b5a3c';                       // faint linen weave
+      o.globalAlpha = .05; o.strokeStyle = '#5a6470';                       // faint linen weave
       for (let x = 0; x < out.width; x += 4 * s0) { o.beginPath(); o.moveTo(x, 0); o.lineTo(x, out.height); o.stroke(); }
       for (let y = 0; y < out.height; y += 4 * s0) { o.beginPath(); o.moveTo(0, y); o.lineTo(out.width, y); o.stroke(); }
       o.globalAlpha = 1;
       o.drawImage(cv, 0, 0);
       // signature corner
       const s = out.width / 1000, pw = 300 * s, ph = 70 * s, px = out.width - pw - 18 * s, py = out.height - ph - 18 * s;
-      o.fillStyle = 'rgba(11,10,9,.88)'; o.fillRect(px, py, pw, ph);
-      o.strokeStyle = '#d4b062'; o.lineWidth = 1.5 * s; o.strokeRect(px + 5 * s, py + 5 * s, pw - 10 * s, ph - 10 * s);
-      o.fillStyle = '#d4b062'; o.textAlign = 'center'; o.textBaseline = 'middle';
+      o.fillStyle = 'rgba(14,16,19,.9)'; o.fillRect(px, py, pw, ph);
+      o.strokeStyle = '#c9ced6'; o.lineWidth = 1.5 * s; o.strokeRect(px + 5 * s, py + 5 * s, pw - 10 * s, ph - 10 * s);
+      o.fillStyle = '#e8ebef'; o.textAlign = 'center'; o.textBaseline = 'middle';
       o.font = `500 ${21 * s}px Cinzel, Georgia, serif`;
       o.fillText('IVOSART · Studio Walk', px + pw / 2, py + ph * .4);
-      o.fillStyle = '#cfc6b8'; o.font = `italic ${18 * s}px "Cormorant Garamond", Georgia, serif`;
+      o.fillStyle = '#c9ccd1'; o.font = `italic ${18 * s}px "Cormorant Garamond", Georgia, serif`;
       o.fillText('Sofia', px + pw / 2, py + ph * .74);
       return out;
     };

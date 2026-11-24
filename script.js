@@ -637,15 +637,15 @@ const I18N = {
   function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; }; }
 
   // Bold studio colours bursting through the gold-on-black
-  const BOLD = ['#e0263f', '#2f5bea', '#17b3a3', '#e0359b', '#eaa21a', '#d4b062', '#f1ebe0'];
+  const BOLD = ['#c8102e', '#f4f3ef', '#c9ced6', '#8f98a3', '#e8ebef', '#9e0c24'];
   const PALETTES = {
-    hero:    ['#d4b062', '#e0263f', '#2f5bea', '#e0359b', '#17b3a3', '#eaa21a', '#8a2a1c', '#e9cf8e'],
-    finale:  ['#e0263f', '#d4b062', '#e0359b', '#2f5bea', '#eaa21a', '#f1ebe0'],
-    portrait:['#d4b062', '#2f5bea', '#e0263f', '#e9cf8e'],
-    contact: ['#d4b062', '#e0263f', '#17b3a3', '#2f5bea', '#e9cf8e'],
-    gallery: ['#d4b062', '#e0263f', '#8a2a1c', '#e9cf8e', '#2f5bea'],
-    studio:  ['#2f5bea', '#e0359b', '#eaa21a', '#17b3a3', '#e0263f', '#f1ebe0'],
-    bazaar:  ['#eaa21a', '#17b3a3', '#e0263f', '#d4b062', '#e0359b']
+    hero:    ['#c8102e', '#e8ebef', '#8f98a3', '#c9ced6', '#4a525c', '#9e0c24', '#f4f3ef'],
+    finale:  ['#c8102e', '#e8ebef', '#8f98a3', '#2f5bea', '#c9ced6', '#f4f3ef'],
+    portrait:['#c9ced6', '#c8102e', '#8f98a3', '#e8ebef'],
+    contact: ['#c9ced6', '#c8102e', '#8f98a3', '#4a525c', '#e8ebef'],
+    gallery: ['#c9ced6', '#c8102e', '#9e0c24', '#e8ebef', '#5a6470'],
+    studio:  ['#c8102e', '#2f5bea', '#e8ebef', '#8f98a3', '#c9ced6', '#4a525c'],
+    bazaar:  ['#c8102e', '#8f98a3', '#e8ebef', '#c9ced6', '#4a525c']
   };
 
   function paint(canvas, seed, pal, opts = {}) {
@@ -660,7 +660,7 @@ const I18N = {
     c.scale(dpr, dpr);
     const S = Math.max(w, h), base = opts.angle ?? -.5;
     const g = c.createLinearGradient(0, 0, w, h);
-    g.addColorStop(0, '#0c0a09'); g.addColorStop(.5, '#15110e'); g.addColorStop(1, '#090807');
+    g.addColorStop(0, '#0d0f12'); g.addColorStop(.5, '#15181d'); g.addColorStop(1, '#0a0b0d');
     c.fillStyle = g; c.fillRect(0, 0, w, h);
     c.lineCap = 'round'; c.lineJoin = 'round';
 
@@ -706,7 +706,7 @@ const I18N = {
       const pts = path(r() * w, r() * h, base - .4 + (r() - .5), S * (.25 + r() * .3), 30, .3);
       for (let pass = 0; pass < 2; pass++) {
         c.beginPath(); pts.forEach(([x, y], k) => k ? c.lineTo(x, y) : c.moveTo(x, y));
-        c.strokeStyle = pass ? hexA('#f3dc9e', .55) : hexA('#d4b062', .18);
+        c.strokeStyle = pass ? hexA('#e8ebef', .55) : hexA('#c9ced6', .18);
         c.lineWidth = pass ? 1 + r() * 1.5 : 6 + r() * 6; c.stroke();
       }
     }
