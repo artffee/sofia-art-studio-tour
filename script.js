@@ -7,7 +7,8 @@
    ========================================================================== */
 const CONFIG = {
   email: 'usivaylo@gmail.com',      // provided by Ivaylo (typed Usivaylo@gmail.com; Gmail ignores case)
-  whatsapp: '',       // international digits only, e.g. '359888123456' (PLACEHOLDER, not provided yet: hidden)
+  whatsapp: '359879807323', // international digits only (Ivaylo's mobile 0879 807 323)
+  phone: '+359879807323',    // tap-to-call, shown as +359 87 980 7323
   instagram: 'artgallerycaptainnemo', // https://www.instagram.com/artgallerycaptainnemo/
   bookingUrl: '',     // online booking page (FareHarbor, Bokun, GetYourGuide, Calendly…) (PLACEHOLDER, not provided yet: Book → request builder)
   defaultLang: 'en'   // 'en' or 'bg'
@@ -233,7 +234,7 @@ const I18N = {
     'contact.sub': 'Book online, or write for private dates and group bookings.',
     'contact.subReq': 'Send a booking request below, or write for private dates and group bookings.',
     'contact.online': 'Book online', 'contact.write': 'Write for private dates',
-    'ch.email': 'Email', 'ch.todo': 'to be added',
+    'ch.email': 'Email', 'ch.phone': 'Phone', 'ch.todo': 'to be added',
     'foot.line': 'Art Gallery Captain Nemo · A02x Studio · Punto Art Bazaar · Sofia, Bulgaria',
     'bar.from': 'From', 'bar.meta': '2.5 h · up to 8', 'bar.book': 'Book',
     'mail.subject': 'Sofia Studio Tour booking', 'mail.body': 'Hello Ivaylo,\n\nI would like to book: {tier}\nPreferred date(s):\nNumber of guests:\nLanguage (English / Bulgarian):\n\nThank you!',
@@ -456,7 +457,7 @@ const I18N = {
     'contact.sub': 'Резервирайте онлайн или ни пишете за частни дати и групови резервации.',
     'contact.subReq': 'Изпратете заявка за резервация по-долу или ни пишете за частни дати и групови резервации.',
     'contact.online': 'Резервирай онлайн', 'contact.write': 'Пиши за частна дата',
-    'ch.email': 'Имейл', 'ch.todo': 'предстои',
+    'ch.email': 'Имейл', 'ch.phone': 'Телефон', 'ch.todo': 'предстои',
     'foot.line': 'Art Gallery Captain Nemo · A02x Studio · Punto Art Bazaar · София, България',
     'bar.from': 'От', 'bar.meta': '2,5 ч · до 8 гости', 'bar.book': 'Резервирай',
     'mail.subject': 'Резервация – Арт тур в София', 'mail.body': 'Здравей, Ивайло,\n\nБих искал(а) да резервирам: {tier}\nЖелана дата:\nБрой гости:\nЕзик (английски / български):\n\nБлагодаря!',
@@ -479,11 +480,13 @@ const I18N = {
   const mailto = (subject, body) => CONFIG.email
     ? `mailto:${CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` : '';
   const wa = (text) => CONFIG.whatsapp
-    ? `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(text)}` : '';
+    ? `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, '')}${text ? `?text=${encodeURIComponent(text)}` : ''}` : '';
 
   // With an online booking page every Book button opens it; otherwise it scrolls to the
   // booking request builder in #contact (ticket buttons preselect their evening there).
   const bookHref = () => CONFIG.bookingUrl || '#contact';
+  // +359 87 980 7323 style for Bulgarian mobiles; other numbers just get a leading +
+  const fmtPhone = n => { const d = String(n).replace(/\D/g, ''); const m = d.match(/^359(\d{2})(\d{3})(\d{4})$/); return m ? `+359 ${m[1]} ${m[2]} ${m[3]}` : '+' + d; };
   const igHandle = () => CONFIG.instagram.replace(/^@/, '').trim();
 
   function wireLinks() {
@@ -502,7 +505,8 @@ const I18N = {
     const sub = $('.contact__sub'); if (sub) sub.textContent = t(CONFIG.bookingUrl ? 'contact.sub' : 'contact.subReq');
     const ch = {
       email: CONFIG.email && { href: `mailto:${CONFIG.email}`, v: CONFIG.email.toLowerCase() },
-      whatsapp: CONFIG.whatsapp && { href: wa(''), v: '+' + CONFIG.whatsapp.replace(/\D/g, '') },
+      whatsapp: CONFIG.whatsapp && { href: wa(''), v: fmtPhone(CONFIG.whatsapp) },
+      phone: CONFIG.phone && { href: `tel:+${CONFIG.phone.replace(/\D/g, '')}`, v: fmtPhone(CONFIG.phone) },
       instagram: CONFIG.instagram && { href: `https://www.instagram.com/${igHandle()}/`, v: '@' + igHandle() }
     };
     $$('.channel').forEach(a => {

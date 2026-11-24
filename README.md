@@ -115,7 +115,8 @@ Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.
 ```js
 const CONFIG = {
   email: 'usivaylo@gmail.com',        // set (Nov 2026)
-  whatsapp: '',                       // still to come: international digits only, e.g. '359888123456'
+  whatsapp: '359879807323',           // set (Nov 2026): international digits only
+  phone: '+359879807323',             // set: tap-to-call, shown as +359 87 980 7323
   instagram: 'artgallerycaptainnemo', // set: https://www.instagram.com/artgallerycaptainnemo/
   bookingUrl: '',                     // still to come: online booking page (FareHarbor, Bokun, GetYourGuide, Calendly...)
   defaultLang: 'en'
@@ -124,8 +125,7 @@ const CONFIG = {
 
 Empty values are hidden cleanly (no "to be added" text). With no `bookingUrl`, every Book button (header, hero,
 menu, sticky bar, ticket cards, trivia, escape-room "Now see it for real") scrolls to the booking request builder in
-Contact; ticket buttons preselect their evening. The builder sends the prefilled request by email (and shows a
-WhatsApp button once `whatsapp` is set). Adding `bookingUrl` brings back a "Book online" button and points every Book
+Contact; ticket buttons preselect their evening. The builder sends the prefilled request by WhatsApp or email. Adding `bookingUrl` brings back a "Book online" button and points every Book
 button at that page. The static HTML in the Contact section mirrors the email and Instagram values for visitors without
 JavaScript. No payments are wired.
 

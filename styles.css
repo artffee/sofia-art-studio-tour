@@ -1316,3 +1316,4 @@ body::after{opacity:.025;animation:none}
 .menu__lang .lang__btn{min-height:44px}
 /* v13 · options not provided yet are hidden cleanly */
 .contact [hidden],.builder [hidden],.channels li[hidden]{display:none!important}
+@media (min-width:720px){ .channels{grid-template-columns:repeat(2,1fr);max-width:760px} }
