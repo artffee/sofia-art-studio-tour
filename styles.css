@@ -1124,3 +1124,73 @@ html[lang=bg] .fact__q{font-size:clamp(1.4rem,5.6vw,1.9rem)}
 @media (prefers-reduced-motion:reduce){.nav__esc .ico,.nav__morebtn svg{transition:none}}
 .nav__book{white-space:nowrap}
 @media (min-width:1024px){.nav__links .nav__tour{display:none}}
+
+/* ==========================================================================
+   v10 · HISTORY TRIVIA (trivia.js)
+   ========================================================================== */
+.triv{position:relative;max-width:720px;margin:0 auto;padding:18px 16px 14px;
+  background:
+    radial-gradient(circle at 12px 12px,#f0d9a2 0 2px,#6b4c1e 3px,transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) 12px,#f0d9a2 0 2px,#6b4c1e 3px,transparent 4px),
+    radial-gradient(circle at 12px calc(100% - 12px),#f0d9a2 0 2px,#6b4c1e 3px,transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),#f0d9a2 0 2px,#6b4c1e 3px,transparent 4px),
+    radial-gradient(120% 80% at 50% 0%,rgba(212,176,98,.08),transparent 60%),
+    linear-gradient(165deg,#221a13,#120e0b 70%);
+  border:1px solid rgba(212,176,98,.45);
+  box-shadow:inset 0 0 0 5px rgba(11,9,7,.7),inset 0 0 0 6px rgba(212,176,98,.22),0 24px 60px -30px rgba(0,0,0,.9)}
+.triv [hidden]{display:none!important}
+.triv__bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 8px 0}
+.triv__dots{display:flex;gap:6px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.triv__dots li{width:11px;height:11px;border-radius:50%;border:1px solid rgba(212,176,98,.45);background:rgba(0,0,0,.35);transition:background .4s,transform .4s}
+.triv__dots li.is-now{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,176,98,.18)}
+.triv__dots li.is-right{background:radial-gradient(circle at 35% 30%,#f4d995,#b8893c);border-color:#f4d995}
+.triv__dots li.is-wrong{background:#5a2a20;border-color:#b5643a}
+.triv__score{font:600 .7rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+.triv__count{margin:12px 8px 0;font:500 .62rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.triv__card{padding:6px 8px 4px}
+.triv__tag{display:inline-block;margin:12px 0 0;padding:4px 8px;font:600 .58rem/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#1b1206;background:linear-gradient(160deg,#f4d995,#b8893c);border-radius:2px}
+.triv__q{margin:10px 0 14px;font-family:var(--display);font-size:clamp(1.25rem,4.6vw,1.6rem);line-height:1.25;letter-spacing:.01em;text-transform:none;color:var(--bone);outline:none}
+.triv__opts{display:grid;gap:8px}
+.triv__opt{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:10px 12px;text-align:left;cursor:pointer;color:var(--bone);
+  font:500 .98rem/1.3 var(--serif);background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.25));border:1px solid rgba(212,176,98,.3);border-radius:3px;transition:border-color .25s,background .25s,transform .25s}
+.triv__opt b{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;font:700 .7rem/1 var(--sans);color:var(--gold);border:1px solid rgba(212,176,98,.5)}
+.triv__opt:not([disabled]):hover{border-color:var(--gold);background:rgba(212,176,98,.08)}
+.triv__opt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.triv__opt[disabled]{cursor:default}
+.triv__opt.is-right{border-color:#7fd3a4;background:linear-gradient(90deg,rgba(63,179,122,.22),rgba(63,179,122,.05))}
+.triv__opt.is-right b{background:#3fb37a;color:#08130d;border-color:#a8f0c8}
+.triv__opt.is-wrong{border-color:#d4795a;background:linear-gradient(90deg,rgba(181,100,58,.25),rgba(181,100,58,.05))}
+.triv__opt.is-wrong b{background:#b5643a;color:#1b0d06;border-color:#e8a688}
+.triv__opt.is-dim{opacity:.45}
+.triv__opts.is-shake{animation:escShake .45s}
+.triv__reveal{margin-top:14px;padding-top:12px;border-top:1px dashed rgba(212,176,98,.3);animation:trivIn .45s ease both}
+@keyframes trivIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.triv__verdict{margin:0 0 6px;font:600 .74rem/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.triv__verdict.is-right{color:#8fe0b3}.triv__verdict.is-wrong{color:#eba184}
+.triv__exp{margin:0 0 10px;font:italic 1.04rem/1.45 var(--serif);color:var(--bone-2)}
+.triv__src{text-align:left;max-width:none;margin-bottom:12px}
+.triv__src ul{margin:8px 0 0;padding-left:18px;font-size:.84rem}
+.triv__src a{color:var(--gold);text-underline-offset:3px;word-break:break-word}
+.triv__next{min-height:44px}
+.triv__end{text-align:center;padding:10px 8px 6px;outline:none}
+.triv__gears svg{width:58px;height:58px;fill:#c39443;stroke:#5a3d16;stroke-width:2}
+.triv__gears svg circle{fill:#17120e}
+.triv__end.is-play .triv__gears svg{animation:escSpin 2.2s cubic-bezier(.3,0,.2,1)}
+.triv__end .kicker{margin:6px 0 0}
+.triv__final{margin:2px 0 8px;font-family:var(--display);font-size:2.6rem;line-height:1;color:var(--gold)}
+.triv__rankk{margin:0;font:500 .6rem/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.triv__rank{margin:6px 0 4px;font-family:var(--display);font-size:1.5rem;color:var(--bone)}
+.triv__ranktxt{margin:0 auto 8px;max-width:420px;font:italic 1.02rem/1.4 var(--serif);color:var(--bone-2)}
+.triv__best{margin:0 0 14px;font:500 .66rem/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.triv__endbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.triv__endbtns .btn{min-height:44px}
+.triv__shuf{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 2px;font:500 .62rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute);cursor:pointer;min-height:32px}
+.triv__shuf input{accent-color:#c39443;width:16px;height:16px;margin:0}
+@media (min-width:720px){
+  .triv{padding:24px 28px 18px}
+  .triv__opts{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .triv__reveal,.triv__opts.is-shake,.triv__end.is-play .triv__gears svg{animation:none}
+  .triv__dots li,.triv__opt{transition:none}
+}

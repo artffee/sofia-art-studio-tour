@@ -49,6 +49,25 @@ Deploy: import the repo into Vercel (Framework preset: **Other**, no build comma
 
 - **Navigation**: the desktop nav (from 1280px) has Route, **Escape Room** (key icon, "New" tag), an **Explore ▾** dropdown (Quiz, Paint studio, Fun facts, Glimpses, Route map), Tickets, The Artist and Contact. Below 1280px the burger menu shows the main links with line icons, then a compact "Play & explore" group that fits one phone screen. Menu links close the menu and land just below the fixed header. A small "Can you escape the gallery?" teaser at the end of the route links to the game.
 
+- **History Trivia** (`trivia.js`, after the escape room): 10 multiple-choice questions on Sofia and art history, shown one at a time with 4 shuffled options. You get instant right/wrong feedback, a short explanation and a Sources toggle with links, plus progress dots and a final score with a brass rank (Apprentice Cog → Captain of the Nautilus). It has Play again, Book the tour and an optional "Shuffle questions" switch, and the best score is saved in `localStorage` (`ivosart-trivia-best`). Keyboard: 1–4 or A–D picks an answer. It's linked from the menu's Play & explore group and the desktop Explore dropdown.
+
+## History trivia · sources
+
+Each answer was checked in Nov 2026. The text and links live in `trivia.js`.
+
+| # | Question → answer | Source |
+|---|---|---|
+| 1 | Sofia's motto → "Raste, no ne staree" (Ever growing, never ageing) | https://en.wikipedia.org/wiki/Sofia |
+| 2 | Origin of the name → the Saint Sofia Church (Greek sophia = wisdom); earlier Serdica, then Sredets | https://en.wikipedia.org/wiki/Sofia · https://en.wikipedia.org/wiki/Hagia_Sophia_Church,_Sofia |
+| 3 | Oldest building in Sofia → Rotunda of St George (early 4th c., Roman baths; frescoes uncovered in the 20th c.) | https://en.wikipedia.org/wiki/Church_of_St._George,_Sofia |
+| 4 | Boyana Church frescoes painted in → 1259 (World Heritage since 1979) | https://whc.unesco.org/en/list/42/ |
+| 5 | Alexander Nevsky Cathedral honours → Russian soldiers who died in the Russo-Turkish War of 1877–78 (built mostly 1904–1912; dome 45 m) | https://en.wikipedia.org/wiki/Alexander_Nevsky_Cathedral,_Sofia |
+| 6 | Vitosha's highest peak → Cherni Vrah, 2,290 m (Aleko Konstantinov's climb with ~300 people on 27 Aug 1895) | https://en.wikipedia.org/wiki/Cherni_Vrah |
+| 7 | Bulgarian-born artist who wrapped the Reichstag → Christo (born Gabrovo 1935, studied at the Sofia Academy of Fine Arts; Reichstag 1995 after 24 years) | https://en.wikipedia.org/wiki/Christo_and_Jeanne-Claude |
+| 8 | Jules Pascin, "Prince of Montparnasse", born in → Vidin, 1885 ("Pascin" is an anagram of Pincas) | https://en.wikipedia.org/wiki/Jules_Pascin |
+| 9 | Ultramarine was made from → ground lapis lazuli (Afghanistan; at times as valuable as gold; synthetic from 1826) | https://en.wikipedia.org/wiki/Ultramarine |
+| 10 | Who stole the Mona Lisa in 1911 → Vincenzo Peruggia, a Louvre employee (Apollinaire arrested, Picasso questioned, both cleared; returned 1914) | https://en.wikipedia.org/wiki/Mona_Lisa |
+
 ## Fun facts · sources
 
 Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.*`), and the same list is in a comment in `interactive.js` (§8).

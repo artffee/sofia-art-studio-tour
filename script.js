@@ -188,7 +188,8 @@ const I18N = {
     'egg.1': 'Steady hand.', 'egg.2': 'Bold choice of colour.', 'egg.3': 'Okay, Pollock. Save some paint for the studio.',
     'skip': 'Skip to content',
     'nav.tour': 'The Tour', 'nav.route': 'Route', 'nav.tickets': 'Tickets', 'nav.artist': 'The Artist', 'nav.contact': 'Contact',
-    'nav.escape': 'Escape Room', 'nav.new': 'New', 'nav.more': 'Explore', 'nav.playk': 'Play & explore', 'nav.quiz': 'Quiz', 'nav.paint': 'Paint studio', 'nav.facts': 'Fun facts', 'nav.glimpses': 'Glimpses', 'nav.map': 'Route map',
+    'nav.escape': 'Escape Room', 'nav.new': 'New', 'nav.more': 'Explore', 'nav.playk': 'Play & explore', 'nav.quiz': 'Quiz', 'nav.paint': 'Paint studio', 'nav.facts': 'Fun facts', 'nav.glimpses': 'Glimpses', 'nav.map': 'Route map', 'nav.trivia': 'History trivia',
+    'triv.kicker': 'Brass brain teaser', 'triv.title': 'History Trivia', 'triv.sub': 'Ten questions on Sofia and art history. Every answer checked, every source linked.',
     'esc.teaser': 'Can you escape the gallery?', 'esc.teaserBtn': 'Try the escape room',
     'cta.book': 'Book the tour', 'cta.route': 'Peek at the route',
     'hero.kicker': 'Sofia, Bulgaria · Small groups · English & Bulgarian',
@@ -409,7 +410,8 @@ const I18N = {
     'egg.1': 'Твърда ръка.', 'egg.2': 'Смел избор на цвят.', 'egg.3': 'Добре, Полък. Оставете малко боя и за ателието.',
     'skip': 'Към съдържанието',
     'nav.tour': 'Турът', 'nav.route': 'Маршрут', 'nav.tickets': 'Билети', 'nav.artist': 'Художникът', 'nav.contact': 'Контакт',
-    'nav.escape': 'Ескейп стая', 'nav.new': 'Ново', 'nav.more': 'Още', 'nav.playk': 'Играй и разгледай', 'nav.quiz': 'Тест', 'nav.paint': 'Мини ателие', 'nav.facts': 'Любопитни факти', 'nav.glimpses': 'Мигове', 'nav.map': 'Карта на маршрута',
+    'nav.escape': 'Ескейп стая', 'nav.new': 'Ново', 'nav.more': 'Още', 'nav.playk': 'Играй и разгледай', 'nav.quiz': 'Тест', 'nav.paint': 'Мини ателие', 'nav.facts': 'Любопитни факти', 'nav.glimpses': 'Мигове', 'nav.map': 'Карта на маршрута', 'nav.trivia': 'Викторина',
+    'triv.kicker': 'Месингова главоблъсканица', 'triv.title': 'Исторически въпроси', 'triv.sub': 'Десет въпроса за София и историята на изкуството. Всеки отговор е проверен, всеки източник е посочен.',
     'esc.teaser': 'Ще избягате ли от галерията?', 'esc.teaserBtn': 'Към ескейп стаята',
     'cta.book': 'Резервирай тура', 'cta.route': 'Надникни в маршрута',
     'hero.kicker': 'София, България · Малки групи · Английски и български',
@@ -601,7 +603,7 @@ const I18N = {
       if (en.isIntersecting) links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['tour', 'route', 'escape', 'tickets', 'artist', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secObs.observe(s); });
+  ['tour', 'route', 'escape', 'trivia', 'tickets', 'artist', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) secObs.observe(s); });
 
   /* ---------- Reveal on scroll ---------- */
   if (reduce || !('IntersectionObserver' in window)) {

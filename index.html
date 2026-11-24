@@ -80,6 +80,7 @@
       <symbol id="i-paint" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.3 0 1.9-.8 1.6-1.9-.4-1.3.4-2.3 1.8-2.3h1.8c1.9 0 3.3-1.4 3.3-3.5 0-5.2-3.8-9.3-8.5-9.3z"/><circle cx="8" cy="11" r="1"/><circle cx="11" cy="7.6" r="1"/><circle cx="15.3" cy="8.4" r="1"/></symbol>
       <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17.5h6M10 20.5h4M8.6 14.6A6 6 0 1 1 15.4 14.6c-.8.7-1.2 1.6-1.2 2.9H9.8c0-1.3-.4-2.2-1.2-2.9z"/></symbol>
       <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="1.6"/><path d="m4 17.5 5-4.5 3.5 3 3-2.5 4.5 4"/></symbol>
+      <symbol id="i-trivia" viewBox="0 0 24 24"><path d="M4 9h16L12 4.5z"/><path d="M6.5 9v8M10 9v8M14 9v8M17.5 9v8M4.5 17h15M3.5 20h17"/></symbol>
       <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
     </svg>
     <div class="nav__inner">
@@ -97,6 +98,7 @@
         <div class="nav__more">
           <button type="button" class="nav__morebtn" aria-expanded="false" aria-controls="moreMenu"><span data-i18n="nav.more">Explore</span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
           <div class="nav__drop" id="moreMenu" hidden>
+            <a href="#trivia"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-trivia"/></svg><span data-i18n="nav.trivia">History trivia</span></a>
             <a href="#quiz"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-quiz"/></svg><span data-i18n="nav.quiz">Quiz</span></a>
             <a href="#studio"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-paint"/></svg><span data-i18n="nav.paint">Paint studio</span></a>
             <a href="#facts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="nav.facts">Fun facts</span></a>
@@ -136,6 +138,7 @@
         <p class="menu__label" data-i18n="nav.playk">Play &amp; explore</p>
         <div class="menu__play">
           <a href="#escape" class="menu__esc"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg><span data-i18n="nav.escape">Escape Room</span><b class="tag-new" data-i18n="nav.new">New</b></a>
+          <a href="#trivia"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-trivia"/></svg><span data-i18n="nav.trivia">History trivia</span></a>
           <a href="#quiz"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-quiz"/></svg><span data-i18n="nav.quiz">Quiz</span></a>
           <a href="#studio"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-paint"/></svg><span data-i18n="nav.paint">Paint studio</span></a>
           <a href="#facts"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bulb"/></svg><span data-i18n="nav.facts">Fun facts</span></a>
@@ -533,6 +536,56 @@
       </div>
     </section>
 
+    <!-- ================= HISTORY TRIVIA (trivia.js) — every answer sourced, see README ================= -->
+    <section class="section trivia" id="trivia" aria-labelledby="trivia-title">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker" data-i18n="triv.kicker">Brass brain teaser</p>
+          <h2 id="trivia-title" data-i18n="triv.title">History Trivia</h2>
+          <svg class="brush" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M6 15 C 60 6, 110 20, 160 12 S 250 6, 294 13"/><path class="brush__thin" pathLength="1" d="M30 19 C 90 14, 170 22, 270 17"/></svg>
+          <p class="section__sub" data-i18n="triv.sub">Ten questions on Sofia and art history. Every answer checked, every source linked.</p>
+        </header>
+        <div class="triv reveal" id="triv">
+          <div class="triv__bar">
+            <ol class="triv__dots" id="trivDots" aria-hidden="true"></ol>
+            <span class="triv__score" id="trivScore">Score 0</span>
+          </div>
+          <p class="triv__count" id="trivCount">Question 1 of 10</p>
+          <div class="triv__card" id="trivCard">
+            <p class="triv__tag" id="trivTag">Sofia</p>
+            <h3 class="triv__q" id="trivQ" tabindex="-1"></h3>
+            <div class="triv__opts" id="trivOpts" role="group" aria-labelledby="trivQ"></div>
+            <div class="triv__reveal" id="trivReveal" hidden>
+              <p class="triv__verdict" id="trivVerdict"></p>
+              <p class="triv__exp" id="trivExp"></p>
+              <details class="deck__src triv__src">
+                <summary id="trivSrcSum">Sources</summary>
+                <ul id="trivSrc"></ul>
+              </details>
+              <button type="button" class="btn btn--gold btn--sm triv__next" id="trivNext">Next question</button>
+            </div>
+          </div>
+          <div class="triv__end" id="trivEnd" tabindex="-1" hidden>
+            <div class="triv__gears" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><path d="M28 2h8l1.5 7.2a23 23 0 0 1 6 2.5l6.1-4.1 5.7 5.7-4.1 6.1a23 23 0 0 1 2.5 6L61 28v8l-7.2 1.5a23 23 0 0 1-2.5 6l4.1 6.1-5.7 5.7-6.1-4.1a23 23 0 0 1-6 2.5L36 62h-8l-1.5-7.2a23 23 0 0 1-6-2.5l-6.1 4.1-5.7-5.7 4.1-6.1a23 23 0 0 1-2.5-6L3 36v-8l7.2-1.5a23 23 0 0 1 2.5-6L8.6 14.4l5.7-5.7 6.1 4.1a23 23 0 0 1 6-2.5z"/><circle cx="32" cy="32" r="9"/></svg>
+            </div>
+            <p class="kicker" id="trivFinalK">Final score</p>
+            <p class="triv__final" id="trivFinal">0 / 10</p>
+            <p class="triv__rankk" id="trivRankK">Your rank</p>
+            <h3 class="triv__rank" id="trivRank"></h3>
+            <p class="triv__ranktxt" id="trivRankTxt"></p>
+            <p class="triv__best" id="trivBest"></p>
+            <div class="triv__endbtns">
+              <button type="button" class="btn btn--ghost btn--sm" id="trivAgain">Play again</button>
+              <a class="btn btn--gold btn--sm js-book" href="#contact" data-i18n="cta.book">Book the tour</a>
+            </div>
+          </div>
+          <label class="triv__shuf"><input type="checkbox" id="trivShuffle"><span id="trivShufLbl">Shuffle questions</span></label>
+          <p class="sr-only" id="trivLive" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= TICKETS ================= -->
     <section class="section tickets" id="tickets" aria-labelledby="tickets-title">
       <div class="wrap">
@@ -828,5 +881,6 @@
   <script src="script.js" defer></script>
   <script src="interactive.js" defer></script>
   <script src="escape.js" defer></script>
+  <script src="trivia.js" defer></script>
 </body>
 </html>
