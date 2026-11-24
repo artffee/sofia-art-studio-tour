@@ -132,7 +132,7 @@ const I18N = {
     "ff.next": "Next fact",
     "ff.swipe": "Swipe the card for another",
     "ff.sources": "Sources",
-    "ff.srcnote": "Checked against Wikipedia and other reputable sources. The full list is in the project README.",
+    "ff.srcnote": "Checked against Wikipedia and other reputable sources:",
     "ff.hint": "Press to reveal the answer. Use the buttons below or swipe for another fact.",
     "ff.flipped": "Answer shown",
     "ff.tag.sofia": "Sofia",
@@ -195,7 +195,7 @@ const I18N = {
     'hero.kicker': 'Sofia, Bulgaria · Small groups · English & Bulgarian',
     'hero.title': 'Inside Sofia\u2019s <span>Hidden</span> Art Studios',
     'hero.sub': 'Skip the museums. Walk with a working painter through his gallery, his studio and the art bazaar on Shishman Street, then paint your own piece to take home.',
-    'facts.hn': '2.5', 'facts.hours': 'hours', 'facts.doors': 'doors', 'facts.guests': 'guests', 'facts.from': 'from',
+    'facts.hn': '2.5', 'facts.hours': 'hours', 'facts.doors': 'doors', 'facts.guests': 'guests', 'facts.from': 'from', 'facts.price': 'From €40', 'facts.tickets': 'tickets', 'route.s3p': 'Our partner stop: Pepi Arbov\u2019s Punto Art Bazaar.', 'play.kicker': 'After you book', 'play.title': 'Play', 'play.sub': 'Games for the curious: an escape room, history trivia, a ticket quiz and fun facts.',
     'photo.soon': 'Photo coming soon', 'photo.portrait': 'Portrait coming soon',
     'route.kicker': 'The Route · 2.5 hours',
     'route.title': 'Three doors most visitors never open',
@@ -354,7 +354,7 @@ const I18N = {
     "ff.next": "Следващ факт",
     "ff.swipe": "Плъзнете картата за следващ",
     "ff.sources": "Източници",
-    "ff.srcnote": "Проверени в Уикипедия и други надеждни източници. Пълният списък е в README файла на проекта.",
+    "ff.srcnote": "Проверени в Уикипедия и други надеждни източници:",
     "ff.hint": "Натиснете, за да видите отговора. Използвайте бутоните отдолу или плъзнете за друг факт.",
     "ff.flipped": "Отговорът е показан",
     "ff.tag.sofia": "София",
@@ -417,7 +417,7 @@ const I18N = {
     'hero.kicker': 'София, България · Малки групи · Английски и български',
     'hero.title': 'Скритите <span>арт</span> ателиета на София',
     'hero.sub': 'Забравете музеите. Разходете се с действащ художник из неговата галерия, ателието му и арт базара на улица „Шишман“, а после нарисувайте своя собствена творба, която да отнесете у дома.',
-    'facts.hn': '2,5', 'facts.hours': 'часа', 'facts.doors': 'врати', 'facts.guests': 'гости', 'facts.from': 'от',
+    'facts.hn': '2,5', 'facts.hours': 'часа', 'facts.doors': 'врати', 'facts.guests': 'гости', 'facts.from': 'от', 'facts.price': 'От €40', 'facts.tickets': 'билети', 'route.s3p': 'Нашата партньорска спирка: Punto Art Bazaar на Пепи Арбов.', 'play.kicker': 'След резервацията', 'play.title': 'Игри', 'play.sub': 'Игри за любопитните: ескейп стая, исторически въпроси, тест за билет и любопитни факти.',
     'photo.soon': 'Снимката предстои', 'photo.portrait': 'Портретът предстои',
     'route.kicker': 'Маршрутът · 2,5 часа',
     'route.title': 'Три врати, които повечето посетители никога не отварят',
@@ -468,6 +468,7 @@ const I18N = {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let lang = CONFIG.defaultLang;
   try { lang = localStorage.getItem('ivosart-lang') || lang; } catch (e) {}
+  if (lang !== 'en' && lang !== 'bg') lang = CONFIG.defaultLang === 'bg' ? 'bg' : 'en'; // ignore stale/garbage stored values
   if (!I18N[lang]) lang = 'en';
   const t = (k) => (I18N[lang][k] ?? I18N.en[k] ?? '');
 
@@ -514,7 +515,7 @@ const I18N = {
 
   /* ---------- Language ---------- */
   function applyLang(next) {
-    lang = next;
+    lang = next === 'bg' ? 'bg' : 'en';
     document.documentElement.lang = lang;
     $$('[data-i18n]').forEach(el => { const v = t(el.dataset.i18n); if (v) el.textContent = v; });
     $$('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if (v) el.innerHTML = v; });

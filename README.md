@@ -22,7 +22,7 @@ index.html   page structure + SEO / Open Graph tags
 styles.css   all styling
 script.js    CONFIG block, EN/BG translations, animations and interactions
 assets/      favicon, app icons, social preview image (og-image.jpg), photos/
-vercel.json  optional headers for Vercel
+vercel.json  headers for Vercel (HTML/JS/CSS always revalidate; assets cache for 1 hour)
 ```
 
 Run locally: `python3 -m http.server 8080` in this folder, then open http://localhost:8080.
@@ -39,6 +39,16 @@ The site uses a contemporary-gallery palette (`:root` in `styles.css`, block `v1
 - a single crimson accent `#c8102e` (hover `#a30c25`, `#f0596c` for accent text on dark), used for booking buttons and small highlights
 
 The route door pictures are gunmetal duotones. The earlier brass/steampunk look is kept under the git tag `brass-theme`.
+
+## Page order and Play zone
+
+Hero → Route (with the paint studio, which previews the finale) → Glimpses → Tickets → The Artist → Practical → Contact / booking → **Play** (`#play`: Escape the Gallery, History Trivia, the ticket quiz, Fun facts) → footer. The games sit below booking so they never compete with "Book"; the menu's Play links and the desktop Explore ▾ dropdown jump straight to them.
+
+## Caching and language switch
+
+- `index.html` loads `styles.css`, `script.js`, `interactive.js`, `escape.js` and `trivia.js` with a `?v=YYYYMMDD` query. **Bump it on every release** so phones never mix an old script with new HTML. Door images in `styles.css` carry the same query.
+- The page is marked `translate="no"` / `<meta name="google" content="notranslate">` so Chrome's auto-translate can't undo the BG switch.
+- EN/BG switches live in the header (44px tap targets) and at the bottom of the phone menu. Stored choice: `localStorage` `ivosart-lang` (any value other than `en`/`bg` is ignored).
 
 ## Interactive bits (`interactive.js`)
 
