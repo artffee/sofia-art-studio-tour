@@ -1314,3 +1314,5 @@ body::after{opacity:.025;animation:none}
 .menu{gap:12px}
 .menu__label{margin-top:12px}
 .menu__lang .lang__btn{min-height:44px}
+/* v13 · options not provided yet are hidden cleanly */
+.contact [hidden],.builder [hidden],.channels li[hidden]{display:none!important}

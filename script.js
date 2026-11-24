@@ -1,14 +1,15 @@
 /* ==========================================================================
    >>> EDIT HERE <<<  CONTACT & BOOKING PLACEHOLDERS
    Fill these in and every button / contact card on the site updates itself.
-   Leave a value as '' and the site shows a visible "to be added" placeholder
-   (booking buttons then fall back to email → WhatsApp → the Contact section).
+   Leave a value as '' and that option is hidden cleanly (no placeholder text is shown).
+   Without bookingUrl, every "Book" button scrolls to the booking request builder,
+   which sends the prefilled request by email (and by WhatsApp once a number is added).
    ========================================================================== */
 const CONFIG = {
-  email: '',          // e.g. 'hello@your-domain.com'                 (PLACEHOLDER)
-  whatsapp: '',       // international digits only, e.g. '359888123456' (PLACEHOLDER)
-  instagram: '',      // Captain Nemo Instagram handle, without @      (PLACEHOLDER)
-  bookingUrl: '',     // online booking page (FareHarbor, Bokun, GetYourGuide, Calendly…) (PLACEHOLDER)
+  email: 'usivaylo@gmail.com',      // provided by Ivaylo (typed Usivaylo@gmail.com; Gmail ignores case)
+  whatsapp: '',       // international digits only, e.g. '359888123456' (PLACEHOLDER, not provided yet: hidden)
+  instagram: 'artgallerycaptainnemo', // https://www.instagram.com/artgallerycaptainnemo/
+  bookingUrl: '',     // online booking page (FareHarbor, Bokun, GetYourGuide, Calendly…) (PLACEHOLDER, not provided yet: Book → request builder)
   defaultLang: 'en'   // 'en' or 'bg'
 };
 
@@ -230,6 +231,7 @@ const I18N = {
     'faq.q6': 'Can I bring my whole team?', 'faq.a6': 'Yes. Private groups, couples and corporate team events are available on request. Write to us for private dates and group bookings.',
     'contact.kicker': 'Contact', 'contact.title': 'Ready to step inside?',
     'contact.sub': 'Book online, or write for private dates and group bookings.',
+    'contact.subReq': 'Send a booking request below, or write for private dates and group bookings.',
     'contact.online': 'Book online', 'contact.write': 'Write for private dates',
     'ch.email': 'Email', 'ch.todo': 'to be added',
     'foot.line': 'Art Gallery Captain Nemo · A02x Studio · Punto Art Bazaar · Sofia, Bulgaria',
@@ -452,6 +454,7 @@ const I18N = {
     'faq.q6': 'Мога ли да доведа целия си екип?', 'faq.a6': 'Да. Частни групи, двойки и корпоративни тиймбилдинг събития — по заявка. Пишете ни за частни дати и групови резервации.',
     'contact.kicker': 'Контакт', 'contact.title': 'Готови ли сте да влезете?',
     'contact.sub': 'Резервирайте онлайн или ни пишете за частни дати и групови резервации.',
+    'contact.subReq': 'Изпратете заявка за резервация по-долу или ни пишете за частни дати и групови резервации.',
     'contact.online': 'Резервирай онлайн', 'contact.write': 'Пиши за частна дата',
     'ch.email': 'Имейл', 'ch.todo': 'предстои',
     'foot.line': 'Art Gallery Captain Nemo · A02x Studio · Punto Art Bazaar · София, България',
@@ -478,12 +481,10 @@ const I18N = {
   const wa = (text) => CONFIG.whatsapp
     ? `https://wa.me/${CONFIG.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(text)}` : '';
 
-  function bookHref(tier) {
-    const tierName = tier || 'Studio Walk / Captain Nemo Night';
-    if (CONFIG.bookingUrl) return CONFIG.bookingUrl;
-    const body = t('mail.body').replace('{tier}', tierName);
-    return mailto(`${t('mail.subject')} — ${tierName}`, body) || wa(body) || '#contact';
-  }
+  // With an online booking page every Book button opens it; otherwise it scrolls to the
+  // booking request builder in #contact (ticket buttons preselect their evening there).
+  const bookHref = () => CONFIG.bookingUrl || '#contact';
+  const igHandle = () => CONFIG.instagram.replace(/^@/, '').trim();
 
   function wireLinks() {
     $$('.js-book').forEach(a => {
@@ -492,23 +493,26 @@ const I18N = {
       if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } else { a.removeAttribute('target'); }
     });
     $$('.js-write').forEach(a => {
-      a.href = mailto(`${t('mail.subject')} — ${t('mail.private')}`, '') || wa(t('mail.private')) || '#contact';
-      if (a.href.startsWith('https:')) { a.target = '_blank'; a.rel = 'noopener'; }
+      const h = mailto(`${t('mail.subject')} — ${t('mail.private')}`, '') || wa(t('mail.private'));
+      a.hidden = !h; if (h) a.href = h;
+      if (h && h.startsWith('https:')) { a.target = '_blank'; a.rel = 'noopener'; }
     });
+    // "Book online" inside #contact only makes sense with a real booking page
+    const online = $('#bookOnline'); if (online) online.hidden = !CONFIG.bookingUrl;
+    const sub = $('.contact__sub'); if (sub) sub.textContent = t(CONFIG.bookingUrl ? 'contact.sub' : 'contact.subReq');
     const ch = {
-      email: CONFIG.email && { href: `mailto:${CONFIG.email}`, v: CONFIG.email },
+      email: CONFIG.email && { href: `mailto:${CONFIG.email}`, v: CONFIG.email.toLowerCase() },
       whatsapp: CONFIG.whatsapp && { href: wa(''), v: '+' + CONFIG.whatsapp.replace(/\D/g, '') },
-      instagram: CONFIG.instagram && { href: `https://instagram.com/${CONFIG.instagram.replace(/^@/, '')}`, v: '@' + CONFIG.instagram.replace(/^@/, '') }
+      instagram: CONFIG.instagram && { href: `https://www.instagram.com/${igHandle()}/`, v: '@' + igHandle() }
     };
     $$('.channel').forEach(a => {
       const c = ch[a.dataset.channel];
       const v = $('.channel__v', a);
+      const li = a.closest('li') || a;
+      li.hidden = !c;   // not provided yet → hidden, never a placeholder
       if (c) {
         a.href = c.href; v.textContent = c.v; a.classList.remove('is-placeholder');
         if (c.href.startsWith('https:')) { a.target = '_blank'; a.rel = 'noopener'; }
-      } else {
-        a.href = '#contact'; a.classList.add('is-placeholder');
-        v.textContent = `[ ${a.dataset.channel.toUpperCase()} — ${t('ch.todo')} ]`;
       }
     });
   }
@@ -589,7 +593,7 @@ const I18N = {
     setTimeout(settle, reduce ? 30 : 1400);
   }
   document.addEventListener('click', e => {
-    const a = e.target.closest('.nav__links a[href^="#"], #menu a[href^="#"], a.js-jump');
+    const a = e.target.closest('.nav__links a[href^="#"], #menu a[href^="#"], a.js-jump, a.js-book[href^="#"]');
     if (!a || e.defaultPrevented) return;
     const id = a.getAttribute('href').slice(1);
     if (!id || !document.getElementById(id)) return;

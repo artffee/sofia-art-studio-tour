@@ -327,6 +327,9 @@
       $('span', waBtn).textContent = waOn ? t('bk.wa') : t('bk.waTodo');
       $('span', mailBtn).textContent = mailOn ? t('bk.mail') : t('bk.mailTodo');
       [[waBtn, waOn], [mailBtn, mailOn]].forEach(([b, on]) => { if (!on) { b.href = '#contact'; b.removeAttribute('target'); } });
+      // Channels not provided yet are hidden; the first available one becomes the primary button.
+      waBtn.hidden = !waOn; mailBtn.hidden = !mailOn;
+      mailBtn.classList.toggle('btn--primary', !waOn); mailBtn.classList.toggle('btn--ghost', waOn);
     };
     const refresh = () => { setGuests(guests); preview.textContent = build().text; channelState(); };
     const validate = () => {
@@ -335,8 +338,9 @@
       if (!nameIn.value.trim()) { err.textContent = t('bk.errName'); nameIn.focus(); return false; }
       return true;
     };
-    form.addEventListener('input', refresh);
-    form.addEventListener('change', refresh);
+    const clearErr = () => { err.textContent = ''; };   // a fixed field shouldn't keep an old error
+    form.addEventListener('input', () => { clearErr(); refresh(); });
+    form.addEventListener('change', () => { clearErr(); refresh(); });
     form.addEventListener('submit', e => e.preventDefault());
     $$('.stepper button', form).forEach(b => b.addEventListener('click', () => { setGuests(guests + +b.dataset.step); refresh(); buzz(4); }));
     waBtn.addEventListener('click', e => {

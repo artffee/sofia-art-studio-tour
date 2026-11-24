@@ -114,16 +114,20 @@ Each fact was checked in Nov 2026. The text lives in `script.js` (I18N keys `ff.
 
 ```js
 const CONFIG = {
-  email: '',       // e.g. 'hello@your-domain.com'
-  whatsapp: '',    // international digits only, e.g. '359888123456'
-  instagram: '',   // Captain Nemo Instagram handle, without @
-  bookingUrl: '',  // online booking page (FareHarbor, Bokun, GetYourGuide, Calendly...)
+  email: 'usivaylo@gmail.com',        // set (Nov 2026)
+  whatsapp: '',                       // still to come: international digits only, e.g. '359888123456'
+  instagram: 'artgallerycaptainnemo', // set: https://www.instagram.com/artgallerycaptainnemo/
+  bookingUrl: '',                     // still to come: online booking page (FareHarbor, Bokun, GetYourGuide, Calendly...)
   defaultLang: 'en'
 };
 ```
 
-Empty values show a visible "to be added" placeholder on the site. Book buttons use `bookingUrl`, otherwise a
-pre-filled email, otherwise WhatsApp, otherwise they scroll to the Contact section. No payments are wired.
+Empty values are hidden cleanly (no "to be added" text). With no `bookingUrl`, every Book button (header, hero,
+menu, sticky bar, ticket cards, trivia, escape-room "Now see it for real") scrolls to the booking request builder in
+Contact; ticket buttons preselect their evening. The builder sends the prefilled request by email (and shows a
+WhatsApp button once `whatsapp` is set). Adding `bookingUrl` brings back a "Book online" button and points every Book
+button at that page. The static HTML in the Contact section mirrors the email and Instagram values for visitors without
+JavaScript. No payments are wired.
 
 ### 2. Photos
 
